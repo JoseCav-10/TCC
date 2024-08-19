@@ -71,7 +71,7 @@ class Status_Exame(models.Model):
     EXAMES_CHOICES = [
         ("Pendente", "Pendente"),
         ("Aprovado", "Aprovado"),
-        ("Reusado", "Recusado"),
+        ("Recusado", "Recusado"),
     ]
     
     situacao = models.CharField(max_length=20, choices=EXAMES_CHOICES, default="Pendente")
@@ -84,7 +84,7 @@ class Pedidos_Exames(models.Model):
     requerente = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
     tipo_exame = models.ForeignKey(Tipo_Exame, on_delete=models.CASCADE)
     laudo = models.FileField(upload_to="media")
-    dias_possíveis = models.DateField()
+    dias_possiveis = models.CharField(max_length=20)
     dia_marcado = models.DateField()
     urgencia = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
