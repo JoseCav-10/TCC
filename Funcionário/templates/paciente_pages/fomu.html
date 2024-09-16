@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="section mh">
+  <div class="section-header header-section">
+      <h1>Agendamento</h1>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">home</a></div>
+        <div class="breadcrumb-item"><a href="#">agendamento</a></div>
+        <div class="breadcrumb-item">-</div>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class="card author-box card-primary">
+        <div class="card-body">
+          <div class="author-box-left">
+            <img alt="image" src="{% static 'media/img/default.png' %}" class="rounded-circle author-box-picture">
+            <div class="clearfix"></div>
+            <p href="#" class="btn btn-primary mt-3 follow-btn disable" data-follow-action="alert('follow clicked');" data-unfollow-action="alert('unfollow clicked');">22/02/2008</p>
+          </div>
+
+          <div class="author-box-details">
+            <div class="author-box-name">
+              <a href="#">Sávio Rodrigues Viana</a>
+            </div>
+            <div class="author-box-job">999.999.999-99</div>
+            <div class="author-box-description">
+              
+              
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Cartão SUS:</p>
+                  <small class="small">0909 0909 0909 0909</small>
+                </a>
+
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Endereço:</p>
+                  <small class="small">Centro, Canavial</small>
+                </a>
+  
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Telefone:</p>
+                  <small class="small">(99) 9999-9999</small>
+                </a>  
+        
+              </div>
+
+            </div>
+          
+            <div class="w-100 d-sm-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row"></div>
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class=" card author-box card-primary m-card">
+        <form action="">
+
+          <div >
+            <h2 class="h-agend">Informações do agendamento</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group">
+              <label>Tipo do exame</label>
+              <select class="form-control select2">
+                <option value="" selected disabled>-</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+                <option>Option 3</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label>Laudo médico:</label>
+              <input type="file" class="form-control">
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label>Possíveis datas:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                  </div>
+                </div>
+                <input type="text" class="form-control daterange-cus">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group">
+              <div class="control-label">Condição do exame</div>
+              <label class="custom-switch mt-2">
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input">
+                <span class="custom-switch-indicator"></span>
+                <span class="custom-switch-description">Este exame é urgente?</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+              <button class="btn btn-primary me-md-2" type="button">Enviar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  
+
+{% endblock %}

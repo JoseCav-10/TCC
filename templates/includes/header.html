@@ -1,0 +1,74 @@
+{% block content %}
+{% load static %}
+
+<div class="navbar-bg">
+<nav class="navbar navbar-expand-lg main-navbar">
+  <form class="form-inline mr-auto">
+    <div>
+      <img class="img-logo" src="{% static 'media/img/logo.png' %}" alt="logo">
+    </div>
+    <div class="search-element">
+      <h1 class="title-h1">PortalExames</h1>
+    </div>
+  </form>
+  <ul class="navbar-nav navbar-right">
+    <li class="dropdown dropdown-list-toggle">
+      <a href="#" data-toggle="dropdown" class="nav-link notification-toggle nav-link-lg beep"><i class="far fa-bell"></i></a>
+      <div class="dropdown-menu dropdown-list dropdown-menu-right">
+        <div class="dropdown-header">Notifications
+          <div class="float-right">
+            <a href="#">Mark All As Read</a>
+          </div>
+        </div>
+        <div class="dropdown-footer text-center">
+          <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </li>
+
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <img alt="image" src="{% static 'media/img/default.png' %}" class="rounded-circle mr-1">
+        <div class="d-sm-none d-lg-inline-block">Jeferson Queiroga</div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-title">Logged in 5 min ago</div>
+        <a href="#" class="dropdown-item has-icon">
+          <i class="far fa-user"></i> Profile
+        </a>
+        <a href="#" class="dropdown-item has-icon">
+          <i class="fas fa-bolt"></i> Activities
+        </a>
+        <a href="#" class="dropdown-item has-icon">
+          <i class="fas fa-cog"></i> Settings
+        </a>
+        <div class="dropdown-divider"></div>
+        <a href="" class="dropdown-item has-icon text-danger">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </li>
+  </ul>
+</nav>
+</div>
+
+
+<nav class="navbar-my navbar-secondary navbar-expand-lg">
+  <div class="container container-ul">
+    <ul class="navbar-nav space-nav ul-navbar">
+      <li class="nav-item active"></li>
+        <a href="#" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
+      </li>
+      <li class="nav-item active"></li>
+        <a href="#" class="nav-link"><i class="far fa-envelope"></i><span>Fazer um agendamento</span></a>
+      </li>
+      <li class="nav-item active">
+        <a href="#" class="nav-link"><i class="fas fa-fire"></i><span>Em andamento</span></a>
+      </li>
+      <li class="nav-item active"></li>
+        <a href="#" class="nav-link"><i class="far fa-user"></i><span>Meus Dados</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
+{% endblock content %}

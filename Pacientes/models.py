@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-
+from django.utils import timezone
+from datetime import datetime
 # Create your models here.
 
 class UsuarioManager(BaseUserManager):
@@ -49,6 +50,7 @@ class CustomUsuario(AbstractUser):
     fone = models.CharField("Telefone", max_length=30, blank=True, null=True, default=None) 
     endereco = models.CharField("Endereço", max_length=255, blank=True, null=True, default=None)
     cep = models.CharField("CEP", max_length=9, blank=True, null=True, default=None)
+    foto_perfil = models.ImageField(upload_to="uploads/", default="img/default.png", blank=True, null=True)
     is_staff = models.BooleanField("Membro da Equipe", default=False)
 
     USERNAME_FIELD = 'email'
@@ -81,13 +83,19 @@ class Status_Exame(models.Model):
     
 
 class Pedidos_Exames(models.Model):
+
+
     requerente = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
     tipo_exame = models.ForeignKey(Tipo_Exame, on_delete=models.CASCADE)
-    laudo = models.FileField(upload_to="media")
+    laudo = models.FileField(upload_to="uploads_laudo/")
     dias_possiveis = models.CharField(max_length=20)
     dia_marcado = models.DateField()
+    data_publicacao = models.DateField(editable=False, default=timezone.datetime.now().strftime('%Y-%m-%d'))
+    data_modificacao = models.DateField(default=timezone.datetime.now().strftime('%Y-%m-%d'))
     urgencia = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
+    
+    
 
     def __str__(self):
         return self.requerente
