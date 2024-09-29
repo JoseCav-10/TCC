@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="section">
+  <!--Título da página-->
+    <div class="section-header header-section">
+      <h1>Central de Serviços</h1>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="#">Central de Serviços</a></div>
+        <div class="breadcrumb-item"><a href="#">-</a></div>
+        <div class="breadcrumb-item">-</div>
+      </div>
+    </div>
+    <!--Até aqui-->
+
+    <div class="section-body">
+      <h2 class="section-title">Home</h2>
+      <p class="section-lead">Bora trabalhar nesse carai.</p>
+
+      <div class="row">
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <div class="card-body height">
+              
+              <div class="gallery gallery-fw" data-item-height="100">
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"><img src="{% static 'media/img/pedidos.png' %}" class="img-card" alt=""></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="space-home-card">
+                  <h1 class="title-home-card">Pedidos</h1>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <div class="my-home-card-body card-body height">
+              <div class="gallery gallery-fw" data-item-height="100">
+               
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"><img class="img-card" src="{% static 'media/img/pedidos urgentes.png' %}" alt="andamento"></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="space-home-card">
+                  <h1 class="title-home-card">Pedidos Urgentes</h1>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-12 col-sm-6 col-lg-4">
+          <div class="card">
+            <div class="card-body height">
+              <div class="gallery gallery-fw" data-item-height="100">
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"><img class="img-card" src="{% static 'media/img/home_agendar.png' %}" alt=""></div>
+                <div class="gallery-item" data-image="../assets/img/news/img09.jpg" data-title="Image 1"></div>
+                <div class="space-home-card">
+                  <h1 class="title-home-card">Calendario</h1>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+{% endblock %}
