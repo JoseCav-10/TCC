@@ -19,6 +19,21 @@
           <div class="float-right">
             <a href="#">Mark All As Read</a>
           </div>
+          <div>
+            <div class="notification">
+              <div class="title-noti">
+                <img src="{% static 'media/img/exclamacao.png' %}" alt="exclamação">
+                <h1>Recusado</h1>
+              </div>
+              <div class="data-noti">
+                <div class="dia-noti">15/01/2022</div>
+                <div class="hora-noti">08:00</div>
+              </div>
+              <div class="recado-noti">
+                <p>Seu exame de urina foi recusado pelo estabelecimento</p>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="dropdown-footer text-center">
           <a href="#">View All <i class="fas fa-chevron-right"></i></a>
@@ -33,17 +48,14 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">Logged in 5 min ago</div>
-        <a href="#" class="dropdown-item has-icon">
-          <i class="far fa-user"></i> Profile
+        <a href="{% url 'dado' %}" class="dropdown-item has-icon">
+          <i class="far fa-user"></i> Conta
         </a>
-        <a href="#" class="dropdown-item has-icon">
-          <i class="fas fa-bolt"></i> Activities
-        </a>
-        <a href="#" class="dropdown-item has-icon">
-          <i class="fas fa-cog"></i> Settings
+        <a href="{% url 'senha_f' %}" class="dropdown-item has-icon">
+          <i class="fas fa-cog"></i> Mudar senha
         </a>
         <div class="dropdown-divider"></div>
-        <a href="" class="dropdown-item has-icon text-danger">
+        <a href="{% url 'logout' %}" class="dropdown-item has-icon text-danger">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
       </div>
@@ -57,16 +69,16 @@
   <div class="container container-ul">
     <ul class="navbar-nav space-nav ul-navbar">
       <li class="nav-item active"></li>
-        <a href="#" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="{% url 'home' %}" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
       </li>
       <li class="nav-item active"></li>
-        <a href="#" class="nav-link"><i class="far fa-envelope"></i><span>Fazer um agendamento</span></a>
+        <a href="{% url 'form' %}" class="nav-link"><i class="far fa-envelope"></i><span>Fazer um agendamento</span></a>
       </li>
       <li class="nav-item active">
-        <a href="#" class="nav-link"><i class="fas fa-fire"></i><span>Em andamento</span></a>
+        <a href="{% url 'anda' %}" class="nav-link"><i class="fas fa-fire"></i><span>Em andamento</span></a>
       </li>
       <li class="nav-item active"></li>
-        <a href="#" class="nav-link"><i class="far fa-user"></i><span>Meus Dados</span></a>
+        <a href="{% url 'dado' %}" class="nav-link"><i class="far fa-user"></i><span>Meus Dados</span></a>
       </li>
     </ul>
   </div>

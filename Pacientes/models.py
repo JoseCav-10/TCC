@@ -84,7 +84,6 @@ class Status_Exame(models.Model):
 
 class Pedidos_Exames(models.Model):
 
-
     requerente = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
     tipo_exame = models.ForeignKey(Tipo_Exame, on_delete=models.CASCADE)
     laudo = models.FileField(upload_to="uploads_laudo/")

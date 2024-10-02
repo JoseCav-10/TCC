@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+    
+    <div class="section-header header-section">
+        <h1>Meus dados</h1>
+        <div class="section-header-breadcrumb">
+          <div class="breadcrumb-item active"><a href="#">Home</a></div>
+          <div class="breadcrumb-item"><a href="#">Meus dados</a></div>
+          <div class="breadcrumb-item">-</div>
+        </div>
+    </div>
+    
+    <form class="form-meus-dados w-75 m-auto">
+        <div class="mb-3">
+            <label for="exampleInputText1" class="form-label">Nome completo</label>
+            <input type="text" class="form-control" id="exampleInputText1" >
+        </div>
+
+        <div class="sus-cpf row mb-3">
+            <div class="my-col1 col">
+                <label for="cpfInput" class="form-label">CPF</label>
+                <input type="text" class="form-control" id="cpfInput">
+            </div>
+
+            <div class="my-col2 col">
+                <label for="susInput" class="form-label">Cartão SUS</label>
+                <input type="text" class="form-control" id="susInput">
+            </div>
+        </div>
+        
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Endereço de e-mail</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+    
+        <div class="phone-cep row mb-3">
+            <div class="my-col1 col">
+                <label for="phoneInput" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="phoneInput">
+            </div>
+
+            <div class="my-col2 col">
+                <label for="cepInput" class="form-label">CEP</label>
+                <input type="text" class="form-control" id="cepInput">
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="exampleInputText1" class="form-label">Endereço</label>
+            <input type="text" class="form-control" id="exampleInputText1" >
+        </div>
+            
+        <div class="date-sex row mb-3">
+            <div class="my-col1 col">
+                <label for="dateInput" class="form-label">Data nascimento</label>
+                <input type="date" class="form-control" id="dateInput">
+            </div>
+
+            <div class="my-col2 col">
+                <label for="dateInput" class="form-label">Sexo</label>
+                <div class="sex-input form-control bg-transparent">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">masculino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                    <label class="form-check-label" for="inlineRadio2">feminino</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                    <label class="form-check-label" for="inlineRadio3">outro</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <button type="submit" class="my-btn-data btn btn-primary mt-7">Submit</button>
+    </form>
+
+     
+    <!--Para essa parte utilizar o formulário, Horizontal Form, contido em bootstrap-form.html desabilitando os input para servir apenas como exibição -->
+    <div class="section-body">
+        <h2 class="section-title">Histórico de exames</h2>
+        <p class="section-lead">Veja o histórico de exames concluídos aqui.</p>
+
+        <div class="card-body">
+            <div id="accordion">
+              <div class="my-accordion accordion">
+                <div class="my-accordion-h accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-1" >
+                  <h4 class="my-accordion-h4">ID: 9823365 - 27/04/2024</h4>
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion">
+                  <!--<p class="mb-0"></p>-->
+                  <table>
+                    <tr class="mb-0 flex-tr">
+                      <td><span class="destaque">Exame</span>: Hemograma</td>
+                      <td><span class="destaque">Paciente</span>: Sávio Rodirgues</td>
+                      <td><span class="destaque">Situação</span>: Concluído</td>
+                      <td><span class="destaque">Laudo</span>: <a href="#">Disponível neste link</a></td>
+                    </tr>
+                  </table>
+
+                </div>
+              </div>
+
+              <div class="my-accordion accordion">
+                <div class="my-accordion-h accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-2">
+                  <h4 class="my-accordion-h4">ID: 928725 - 10/12/2019</h4>
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="accordion-body collapse" id="panel-body-2" data-parent="#accordion">
+                  <table>
+                    <tr class="mb-0 flex-tr">
+                      <td><span class="destaque">Exame</span>: Espectograma</td>
+                      <td><span class="destaque">Paciente</span>: Sávio Rodirgues</td>
+                      <td><span class="destaque">Situação</span>: Negado</td>
+                      <td><span class="destaque">Laudo</span>: <a href="#">Disponível neste link</a></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+
+              <div class="my-accordion accordion">
+                <div class="my-accordion-h accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-3">
+                  <h4 class="my-accordion-h4">ID: 973456 - 22/02/2002</h4>
+                  <i class="fas fa-search"></i>
+                </div>
+                <div class="accordion-body collapse" id="panel-body-3" data-parent="#accordion">
+
+                  <table>
+                    <tr class="mb-0 flex-tr">
+                      <td><span class="destaque">Exame</span>: Fezes</td>
+                      <td><span class="destaque">Paciente</span>: Sávio Rodirgues</td>
+                      <td><span class="destaque">Situação</span>: Concluído com sucesso</td>
+                      <td><span class="destaque">Laudo</span>: <a href="#">Disponível neste link</a></td>
+                    </tr>
+                  </table>
+
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

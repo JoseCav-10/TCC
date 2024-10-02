@@ -2,6 +2,29 @@
     display: none;
 }
 
+.link-home{
+    text-decoration: none;
+}
+
+.link-home:hover{
+    text-decoration: none;
+}
+
+.div-logo-entrada{
+    background-color: var(--cor_main);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 5px;
+}
+
+.logo-entrada{
+    background-color: var(--cor_main);
+    border-radius: 100%;
+    width: 160px;
+    padding: 0.5rem;
+
+    
+}
 
 .small{
     text-indent: 10rem;
@@ -13,7 +36,9 @@
 
 .my-col-space{
     padding-bottom: 24px;
-    width: 120%;
+    width: 40%;
+    min-width: 360px;
+    max-width: 500px;
     margin-right: 20px;
     margin-left: 20px;
 }
@@ -76,6 +101,100 @@
     margin-right: 2rem;
 }
 
+.div1{
+    grid-area: data;
+    font-size: 48px;
+}
+
+.div2{
+    grid-area: mes;
+    font-size: 24px;
+}
+
+.div3{
+    grid-area: ano;
+    font-size: 24px;
+}
+
+.hora-id-anda{
+    width: 180px;
+}
+
+.p-light-anda{
+    font-weight: normal;
+}
+
+.hora > p, .id > p{
+    width: 100%;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.data-anda{
+    width: 130px;
+    height: 72px;
+    margin-right: 0.5rem;
+    display: grid;
+    grid-template-areas: 
+    "data mes"
+    "data ano"
+    ;
+    column-gap: 10px;
+}
+
+.data-anda > div{
+    background-color: transparent;
+    color: black;
+    font-weight: bold;
+}
+
+.horario-identifi{
+    display: flex;
+    justify-content: space-around;
+}
+
+.my-anda-card{
+    width: 100%;
+    min-width: 360px;
+}
+
+.p-cidade-anda{
+    font-size: 32px;
+    margin-top: 1rem;
+}
+
+.card .my-card-header{
+    background-color: rgba(128, 128, 128, 0.23);
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.descri-situ{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.exc-anda{
+    
+    border-top: 1px solid rgba(0, 0, 0, 0.268);
+    padding-top: 1rem;
+    margin-top: 1rem;
+}
+
+.my-h4-anda{
+    font-weight: bold;
+}
+
+.my-col-2{
+    margin: auto;
+    justify-content: space-evenly;
+}
+
+
 .title-home-card{
     background-color: transparent;
     color: black;
@@ -103,6 +222,55 @@
     width: 100%;
 }
 
+#accordion{
+    width: 90%;
+    margin: auto;
+}
+
+
+.my-accordion-h{
+    height: 4rem;
+    border-left: 5px solid var(--cor_main);
+    border-right: 5px solid var(--cor_main);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.152);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #1165c9;
+}
+
+.accordion .accordion-header .my-accordion-h4{
+    font-size: 16px;
+    font-weight: bold;
+    
+}
+
+.my-col1{
+    padding-left: 0;
+}
+
+.my-col2{
+    padding-right: 0;
+}
+
+.destaque{
+    color: #1165c9;
+}
+
+.form-control{
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.088);
+} 
+
+.my-btn-data{
+    margin-top: 2rem;
+}
+
+.flex-tr{
+    display: flex;
+    
+    gap: 2rem;
+    font-size: 16px;
+}
 
 
 
@@ -122,6 +290,32 @@
 }
 
 @media (max-width: 1024px) {
+   
+    
+
+    .card .card-body{
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .main-content {
+        padding-left: 5px;
+        padding-right: 5px;
+        width: 100% !important;
+    }
+
+    .my-section-header{
+        padding-right: 1rem;
+        width: 110%;
+    }
+
+    .my-col-space{
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0rem;
+        margin-right: 0rem;
+    }
+   
     .navbar-my{
         box-shadow: none;
         margin-left: 0;
@@ -159,4 +353,14 @@
         padding-right: 10px;
     }
 
+}
+
+@media (max-width: 750px) {
+    .flex-tr td{
+        display: block;
+    }
+    
+    .flex-tr{
+        flex-direction: column;
+    }
 }
