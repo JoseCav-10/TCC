@@ -16,21 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from Funcionário.views import index,cadastrar,teste,teste_copy,andament,dados,cadastro,esqueceu_senha
-from django.views.generic.base import TemplateView
-
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", TemplateView.as_view(template_name="Funcionário.index.html"),name="index"),
-    path('teste',index,name="index1"),
     path('contas/', include('django.contrib.auth.urls')),
-    path('aluno/cadastro',cadastrar,name="cadastro_aluno"),
-    path('home/',teste,name="home"),
-    path('cadastro/',cadastro,name="cadastro"),
-    path('esqueceu/',esqueceu_senha,name="senha_f"),
-    path('form/',teste_copy,name="form"),
-    path('anda/',andament,name="anda"),
-    path('dados/',dados,name="dado"),
+    path("", include("Pacientes.urls")),
+    path("func/", include("Funcionário.urls")),
+    
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

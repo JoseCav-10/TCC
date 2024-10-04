@@ -272,7 +272,50 @@
     font-size: 16px;
 }
 
+.title-noti{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
 
+.title-noti > img{
+    width: 32px;
+}
+
+.title-noti > h1{
+    font-size: 24px;
+    margin: 0;
+    
+}
+
+.a-noti{
+    text-decoration: none;
+}
+
+
+
+.aprovado{
+    color: rgb(2, 180, 2);
+}
+
+.recusado{
+    color: rgb(186, 4, 4);
+}
+
+.title-horario{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.notification{
+    margin-top: 0.5rem;
+    border-top: 2px solid var(--cor_main);
+}
+
+.recado-noti > p{
+    white-space: normal;
+}
 
 .img-footer{
     width: 7rem;

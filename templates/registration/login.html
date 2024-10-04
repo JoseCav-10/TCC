@@ -1,11 +1,11 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Django Stisla</title>
+  <title>PortalExames</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -54,7 +54,7 @@
                           <div class="d-block">
                               <label for="password" class="control-label">Senha</label>
                             <div class="float-right">
-                              <a href="auth-forgot-password.html" class="text-small">
+                              <a href="{% url 'senha_f' %}" class="text-small">
                                 Esqueceu a senha?
                               </a>
                             </div>
@@ -78,10 +78,10 @@
                     </div>
                   </div>
                   <div class="mt-5 text-muted text-center">
-                    Ainda não tem uma conta? <a href="auth-register.html">Cadastr-se aqui</a>
+                    Ainda não tem uma conta? <a href="{% url 'register' %}">Cadastre-se aqui</a>
                   </div>
                   <div class="simple-footer">
-                    Copyright &copy; Stisla 2018
+                    Copyright &copy; Prefeitura de Portalegre 2024
                   </div>
                 </div>
               </div>
