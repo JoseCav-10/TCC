@@ -48,7 +48,7 @@ class CustomUsuario(AbstractUser):
         ("Outro", "Outro"),
     ]
 
-    email = models.EmailField("E-mail", unique=True)
+    email = models.EmailField(unique=True)
     cpf = models.CharField("CPF", max_length=14, blank=True, null=True, unique=True)
     name = models.CharField(max_length=255)
     cartao_sus = models.CharField("Cartão do SUS", max_length=100, blank=True, null=True, unique=True)
@@ -117,4 +117,4 @@ class Notificacoes(Base):
     destinatario = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
     visualizacao = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
-    conteudo = models.TextField()
+    conteudo = models.TextField(default="Pedido confirmado")

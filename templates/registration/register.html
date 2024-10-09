@@ -40,87 +40,77 @@
                 <div class="card-header"><h4>Cadastro</h4></div>
   
                 <div class="card-body">
-                  <form class="form-meus-dados w-100 m-auto" autocomplete="off">
+
+                  <form class="form-meus-dados w-100 m-auto" autocomplete="off" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="mb-3">
                         <label for="exampleInputText1" class="form-label">Nome completo</label>
-                        <input type="text" class="form-control" id="exampleInputText1" >
+                        {{ form.name }}
                     </div>
             
                     <div class="sus-cpf row mb-3">
                         <div class="my-col1 col">
-                            <label for="cpfInput" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="cpfInput">
+                            <label for="id_cpf" class="form-label">CPF</label>
+                            {{ form.cpf }}
                         </div>
             
                         <div class="my-col2 col">
                             <label for="susInput" class="form-label">Cartão SUS</label>
-                            <input type="text" class="form-control" id="susInput">
+                            {{ form.cartao_sus }}
                         </div>
                     </div>
                     
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Endereço de e-mail</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                      <label for="id_username" class="form-label">Endereço de e-mail</label>
+                      
+                      {{ form.username }}
+                        
                     </div>
 
                     <div class="senha-csenha row mb-3">
                       <div class="my-col1 col">
-                          <label for="Senha" class="form-label">Senha</label>
-                          <input type="password" class="form-control" id="senha">
+                          <label for="password1" class="form-label">Senha</label>
+                          <input type="password" class="form-control" id="password1" name="password1">
                       </div>
           
                       <div class="my-col2 col">
-                          <label for="csenha" class="form-label">Confirmar senha</label>
-                          <input type="password" class="form-control" id="csenha">
+                          <label for="password2" class="form-label">Confirmar senha</label>
+                          <input type="password" class="form-control" id="password2" name="password2">
                       </div>
                     </div>
                 
                     <div class="phone-cep row mb-3">
                         <div class="my-col1 col">
                             <label for="phoneInput" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="phoneInput">
+                            {{ form.fone }}
                         </div>
             
                         <div class="my-col2 col">
                             <label for="cepInput" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cepInput">
+                            {{ form.cep }}
                         </div>
                     </div>
             
                     <div class="mb-3">
-                        <label for="exampleInputText1" class="form-label">Endereço</label>
-                        <input type="text" class="form-control" id="exampleInputText1" >
+                        <label for="endInput" class="form-label">Endereço</label>
+                        {{ form.endereco }}
                     </div>
                         
                     <div class="date-sex row mb-3">
                         <div class="my-col1 col">
                             <label for="dateInput" class="form-label">Data nascimento</label>
-                            <input type="date" class="form-control" id="dateInput">
+                            {{ form.data_nascimento }}
                         </div>
             
                         <div class="my-col2 col">
-                            <label for="dateInput" class="form-label">Sexo</label>
-                            <div class="sex-input form-control bg-transparent">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                    <label class="form-check-label" for="inlineRadio1">masculino</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                <label class="form-check-label" for="inlineRadio2">feminino</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                                <label class="form-check-label" for="inlineRadio3">outro</label>
-                                </div>
-                            </div>
+                            <label for="" class="form-label">Sexo</label>
+                            {{ form.sexo }}
                         </div>
                     </div>
 
                     <div class="mb-3">
-                      <label for="Foto" class="form-label">Foto de perfil</label>
-                      <input type="file" class="form-control" id="foto">
+                      <label for="foto" class="form-label">Foto de perfil</label>
+                      {{ form.foto_perfil }}
                     </div>
                 
                     <div class="form-group">

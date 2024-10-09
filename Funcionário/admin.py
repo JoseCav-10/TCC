@@ -26,11 +26,12 @@ class CustomUsuarioAdmin(UserAdmin):
     add_form = CustomUsuarioCreateForm
     form = CustomUsuarioChangeForm
     model = CustomUsuario
-    list_display = ("name", "email", "cpf", 'is_staff')
+    list_display = ("username","email", "name","cpf", 'is_staff')
     fieldsets = (
-        (None, {'fields': ('email', "password")}),
+        (None, {'fields': ('email',"username", "password")}),
         ("Informações Pessoais", {'fields': ("name", 'cpf', 'cartao_sus', 'data_nascimento', 'sexo', "fone", "endereco", "cep","foto_perfil")}), 
         ("Permissões", {"fields": ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
         ("Datas Importantes", {'fields': ("last_login", "date_joined")}),
     )
+    labels = {"username": 'E-mail'}
 

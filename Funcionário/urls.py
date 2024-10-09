@@ -1,6 +1,8 @@
 from django.urls import path
-from Pacientes.views import RegisterView
+
+from .views import register_user, forgot_password
 
 urlpatterns = [
-    path("register/", RegisterView.as_view(), name="register"),
+    path('', register_user, name='register'),
+    path('fpass', forgot_password, name='forgot'),
 ]

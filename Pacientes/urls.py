@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import IndexView,Forgot_PasswordView,Form_PedidosView,RegisterView,AndamentoView,Dados_PacienteView,HomeView
+from .views import IndexView,Forgot_PasswordView,Form_PedidosView,AndamentoView,Dados_PacienteView,HomeView
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
