@@ -57,7 +57,7 @@ class CustomUsuario(AbstractUser):
     fone = models.CharField("Telefone", max_length=30, blank=True, null=True, default=None) 
     endereco = models.CharField("Endereço", max_length=255, blank=True, null=True, default=None)
     cep = models.CharField("CEP", max_length=9, blank=True, null=True, default=None)
-    foto_perfil = StdImageField(upload_to=get_file_path, variations={'thumb': {"width": 480, "height": 480, "crop": True}}, default="img/default.png", blank=True, null=True)
+    foto_perfil = StdImageField(upload_to=get_file_path, variations={'thumb': {"width": 30, "height": 30, "crop": True}}, default="img/default.png", blank=True, null=True)
     is_staff = models.BooleanField("Membro da Equipe", default=False)
 
     USERNAME_FIELD = 'email'
@@ -105,12 +105,11 @@ class Pedidos_Exames(Base):
     tipo_exame = models.ForeignKey(Tipo_Exame, on_delete=models.CASCADE)
     laudo = models.FileField(upload_to="uploads_laudo/")
     dias_possiveis = models.CharField(max_length=50)
-    dia_marcado = models.DateField()
+    dia_marcado = models.DateField(blank=True, null=True)
     urgencia = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.requerente
+    
 
 
 class Notificacoes(Base):

@@ -292,7 +292,12 @@
     text-decoration: none;
 }
 
-
+.my-b-logout{
+    padding: 10px 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    font-size: 13px;
+}
 
 .aprovado{
     color: rgb(2, 180, 2);

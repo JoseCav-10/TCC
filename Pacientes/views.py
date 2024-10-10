@@ -1,8 +1,13 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from typing import Any
+from django.db.models.query import QuerySet
+from django.shortcuts import render, redirect
+from django.views.generic import TemplateView, ListView
+from django.views.generic.edit import CreateView
 from Funcionário.models import CustomUsuario
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from Funcionário.forms import CustomUsuarioCreateForm
+import os
 # Create your views here.
 
 
@@ -10,8 +15,18 @@ class IndexView(TemplateView):
     template_name = "paciente_pages/index.html"
 
 
-class HomeView(TemplateView):
+class HomeView(LoginRequiredMixin, ListView):
+    model = CustomUsuario
     template_name = "paciente_pages/home.html"
+    context_object_name = "user"
+    login_url = "/contas/login"
+
+    def get_queryset(self):
+        user = CustomUsuario.objects.get(username=self.request.user)
+        return user
+        
+        
+    
 
 
 class Form_PedidosView(TemplateView):
@@ -50,9 +65,9 @@ class Dados_PacienteView(TemplateView):
     
 
 
-class Forgot_PasswordView(TemplateView):
+'''class Forgot_PasswordView(TemplateView):
     
     template_name = "forgot_password.html"
     
-
+'''
     

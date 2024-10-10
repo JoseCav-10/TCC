@@ -2027,6 +2027,7 @@ h6 .badge {
 }
 .navbar .nav-link.nav-link-user img {
   width: 30px;
+  height: 30px;
 }
 .navbar .nav-link.nav-link-img {
   padding-top: 4px;

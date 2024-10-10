@@ -43,7 +43,21 @@
                   <form class="form-meus-dados w-100 m-auto" autocomplete="off" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     
-                    {{ form.as_p }}
+                    {{ form.requerente }}
+                    <br><br>
+                    
+                    
+                    {{ form.tipo_exame }}
+                    {{ form.laudo }}
+
+                    <label for="first_data">Data1</label>
+                    <input type="date" name="first_data" id="">
+
+                    <label for="second_data">Data2</label>
+                    <input type="date" name="second_data" id="">
+
+                    {{ form.situacao }}
+                    {{ form.urgencia }}
 
                   
                 
