@@ -43,20 +43,22 @@
                   <form class="form-meus-dados w-100 m-auto" autocomplete="off" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     
-                    {{ form.requerente }}
+                    <div class="invisible">{{ form.requerente }}</div>
                     <br><br>
                     
                     
                     {{ form.tipo_exame }}
                     {{ form.laudo }}
 
-                    <label for="first_data">Data1</label>
-                    <input type="date" name="first_data" id="">
+                    
 
-                    <label for="second_data">Data2</label>
-                    <input type="date" name="second_data" id="">
+                    <label for="first_data" class="form-label">Data1</label>
+                    <input type="date" name="first_data" id="" class="form-control">
 
-                    {{ form.situacao }}
+                    <label for="second_data" class="form-label">Data2</label>
+                    <input type="date" name="second_data" id="" class="form-control">
+
+                    <div class="invisible">{{ form.situacao }}</div>
                     {{ form.urgencia }}
 
                   
@@ -80,6 +82,11 @@
     </div>
   </div>
 
+  <script>
+    document.getElementById("id_requerente").value = "{{ user.id }}";
+    document.getElementById("id_situacao").value = "1";
+  </script>
+  <script src="{% static 'assets/js/myscripts.js' %}"></script>
   <!-- General JS Scripts -->
   <script src="{% static 'sweetify/sweetify.js' %}"></script>
 

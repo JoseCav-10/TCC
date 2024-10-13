@@ -3,11 +3,12 @@ from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView
-from Funcionário.models import CustomUsuario
+from Funcionário.models import CustomUsuario,Pedidos_Exames
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
 from Funcionário.forms import CustomUsuarioCreateForm
 import os
+from Funcionário.forms import Pedidos_ExamesForm
 # Create your views here.
 
 
@@ -29,12 +30,55 @@ class HomeView(LoginRequiredMixin, ListView):
     
 
 
-class Form_PedidosView(TemplateView):
-    template_name = "paciente_pages/fomu.html"
+def form_agendamento(request):
+    form = Pedidos_ExamesForm()
+    user = CustomUsuario.objects.get(username=request.user)
+    if request.method == "POST":
+        form = Pedidos_ExamesForm(request.POST, request.FILES)
+        print("POST")
+        print(request.POST)
+        if form.is_valid():
+            print("VALIDO")
+            tipo_exame = form.cleaned_data['tipo_exame']
+            laudo = form.cleaned_data['laudo']
+            urgencia = form.cleaned_data['urgencia']
+            requerente = form.cleaned_data["requerente"]
+            print(requerente.name)
+            first_data = request.POST["first_data"]
+            second_data = request.POST["second_data"]
+            dias_possiveis = f"{first_data},{second_data}"
+            situacao = form.cleaned_data["situacao"]
+
+            Pedidos_Exames.objects.create(requerente=requerente,tipo_exame=tipo_exame,laudo=laudo,urgencia=urgencia,dias_possiveis=dias_possiveis,situacao=situacao)
+
+    context = {
+        "form": form,
+        "user": user
+    }
+
+    return render(request, "paciente_pages/fomu.html", context)
 
 
-class AndamentoView(TemplateView):
-    template_name = "paciente_pages/andamento.html"
+
+class AndamentoView(ListView):
+    model = Pedidos_Exames
+    template_name = "paciente_pages/andamento.html"  # Template a ser utilizado
+    context_object_name = 'objetos'  # Nome do contexto para a lista de objetos
+    paginate_by = 4
+    ordering = "-id"
+
+    def get_queryset(self):
+        # Filtra os pedidos com base no usuário logado
+        return super().get_queryset().filter(requerente=self.request.user)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Cria uma lista de IDs de pedidos aprovados
+        context['aprovados'] = [
+            pedido.id for pedido in context['objetos'] if pedido.situacao.situacao == "Aprovado"
+        ]
+        return context
 
 
 class Dados_PacienteView(TemplateView):

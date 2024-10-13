@@ -45,6 +45,11 @@ class Pedidos_ExamesForm(forms.ModelForm):
     class Meta:
         model = Pedidos_Exames
         fields = ("requerente","tipo_exame","laudo","urgencia","situacao")
+        widgets = {
+            "tipo_exame": forms.Select(attrs={"class": 'form-control select2'}),
+            "laudo": forms.FileInput(attrs={"class": 'form-control'}),
+            "urgencia": forms.CheckboxInput(attrs={"class": 'custom-switch-input'})
+        }
         
 
     

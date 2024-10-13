@@ -17,121 +17,71 @@
       <h2 class="section-title">Agendamentos feitos</h2>
       <p class="section-lead">Veja quais pedidos seus foram aceitos e quando seram realizados.</p>
 
+      <div id="lista_aprovados" class="">{{ aprovados }}</div>
+
       <div class="row my-col-2">
+        {% for obj in objetos %}
+
+        {% if obj.situacao.situacao == "Aprovado" %}
+        <div class="my-col-space col-12 col-sm-6 col-lg-4">
+          <div class="my-card card my-anda-card">
+            <div class="card-header my-card-header">
+              <p class="my-h4-anda">Atendimento presencial</p>
+              <form action=""><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
+            </div>
+            <div class="card-body">
+              
+              <div class="horario-identifi">
+                <div class="data-anda">
+                  <div class="div1">{{ obj.dia_marcado|date:"d" }}</div>
+                  <div class="div2" id="mes_agendado{{ obj.id }}">{{ obj.dia_marcado|date:"m" }}</div>
+                  <div class="div3">{{ obj.dia_marcado|date:"Y" }}</div>
+                </div>
+
+                <div class="hora-id-anda">
+                  <div class="hora">
+                    <p class="p-light-anda"><strong>Horário:</strong></p>
+                    <p>{{ obj.dia_marcado|date:"H:i" }}</p>
+                  </div>
+                  <div class="id">
+                    <p class="p-light-anda"><strong>Identificação do exame:</strong></p>
+                    <p>{{ obj.id }}</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="cidade-anda">
+                <p class="p-cidade-anda">Portalegre</p>
+              </div>
+
+              <div class="descri-situ">
+                
+                <div class="hora">
+                  <p class="p-light-anda"><strong>Descrição:</strong></p>
+                  <p>{{ obj.tipo_exame }}</p>
+                </div>
+
+                <div class="id">
+                  <p class="p-light-anda"><strong>Situação:</strong></p>
+                  <p>Agendado</p>
+                </div>
+              
+
+              </div>
+
+              <div class="exc-anda">
+                <form action="">
+                  <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+
         
-        <div class="my-col-space col-12 col-sm-6 col-lg-4">
-          <div class="my-card card my-anda-card">
-            <div class="card-header my-card-header">
-              <p class="my-h4-anda">Atendimento presencial</p>
-              <form action=""><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
-            </div>
-            <div class="card-body">
-              
-              <div class="horario-identifi">
-                <div class="data-anda">
-                  <div class="div1">23</div>
-                  <div class="div2">NOV</div>
-                  <div class="div3">2023</div>
-                </div>
-
-                <div class="hora-id-anda">
-                  <div class="hora">
-                    <p class="p-light-anda"><strong>Horário:</strong></p>
-                    <p>09:30 AM</p>
-                  </div>
-                  <div class="id">
-                    <p class="p-light-anda"><strong>Identificação do exame:</strong></p>
-                    <p>73549375</p>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="cidade-anda">
-                <p class="p-cidade-anda">Portalegre</p>
-              </div>
-
-              <div class="descri-situ">
-                
-                <div class="hora">
-                  <p class="p-light-anda"><strong>Descrição:</strong></p>
-                  <p>Sanguíneo</p>
-                </div>
-
-                <div class="id">
-                  <p class="p-light-anda"><strong>Situação:</strong></p>
-                  <p>Agendado</p>
-                </div>
-              
-
-              </div>
-
-              <div class="exc-anda">
-                <form action="">
-                  <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
-              </div>
-              
-            </div>
-          </div>
-        </div>
-
-        <div class="my-col-space col-12 col-sm-6 col-lg-4">
-          <div class="my-card card my-anda-card">
-            <div class="card-header my-card-header">
-              <p class="my-h4-anda">Atendimento presencial</p>
-              <form action=""><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
-            </div>
-            <div class="card-body">
-              
-              <div class="horario-identifi">
-                <div class="data-anda">
-                  <div class="div1">09</div>
-                  <div class="div2">JAN</div>
-                  <div class="div3">2023</div>
-                </div>
-
-                <div class="hora-id-anda">
-                  <div class="hora">
-                    <p class="p-light-anda"><strong>Horário:</strong></p>
-                    <p>06:09 FM</p>
-                  </div>
-                  <div class="id">
-                    <p class="p-light-anda"><strong>Identificação do exame:</strong></p>
-                    <p>12121212</p>
-                  </div>
-                </div>
-
-              </div>
-
-              <div class="cidade-anda">
-                <p class="p-cidade-anda">Portalegre</p>
-              </div>
-
-              <div class="descri-situ">
-                
-                <div class="hora">
-                  <p class="p-light-anda"><strong>Descrição:</strong></p>
-                  <p>Cocô</p>
-                </div>
-
-                <div class="id">
-                  <p class="p-light-anda"><strong>Situação:</strong></p>
-                  <p>Agendado</p>
-                </div>
-              
-
-              </div>
-
-              <div class="exc-anda">
-                <form action="">
-                  <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
-              </div>
-              
-            </div>
-          </div>
-        </div>
+        {% elif obj.situacao.situacao == "Pendente" %}
 
         <div class="my-col-space col-12 col-sm-6 col-lg-4">
           <div class="my-card card my-anda-card">
@@ -154,7 +104,7 @@
                 
                 <div class="hora">
                   <p class="p-light-anda"><strong>Descrição:</strong></p>
-                  <p>Sanguíneo</p>
+                  <p>{{ obj.tipo_exame }}</p>
                 </div>
 
                 <div class="id">
@@ -175,8 +125,46 @@
           </div>
         </div>
 
+        {% endif %}
+        {% endfor %}
       </div>
+
+      {% if is_paginated %}
+      <nav aria-label="navegacao-paginacao">
+          <ul class="pagination">
+              {% if page_obj.has_previous %}
+              <li class="page-item"><a href="?page{{ page_obj.previous_page_number }}" class="page-link">&laquo;</a></li>
+              {% else %}
+              <li class="page-item disabled"><a href="#" class="page-link">&laquo;</a></li>
+              {% endif %}
+
+              {% for num in paginator.page_range %}
+
+                  {% if page_obj.number == num %}
+                      <li class="page-item active"><a href="#" class="page-link">{{ num }}</a></li>
+                  {% else %}
+                      <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                  {% endif %}
+
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+              
+                  <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+
+              {% else %}
+
+                  <li class="page-item disabled"><a class="page-link" href="#">&raquo;</a></li>
+              
+              {% endif %}
+          </ul>
+      </nav>
+      {% endif %}
+
+
     </div>
 </section>
+
+<script src="{% static 'assets/js/andamento.js' %}"></script>
 
 {% endblock %}

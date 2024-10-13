@@ -9,32 +9,24 @@ from .models import CustomUsuario,Pedidos_Exames
 
 # Create your views here.
 
+
+
+
 def testes(request):
-    form = Pedidos_ExamesForm()
-    user = CustomUsuario.objects.get(username=request.user)
-    if request.method == "POST":
-        form = Pedidos_ExamesForm(request.POST, request.FILES)
-        print("POST")
-        print(request.POST)
-        if form.is_valid():
-            print("VALIDO")
-            tipo_exame = form.cleaned_data['tipo_exame']
-            laudo = form.cleaned_data['laudo']
-            urgencia = form.cleaned_data['urgencia']
-            requerente = form.cleaned_data["requerente"]
-            first_data = request.POST["first_data"]
-            second_data = request.POST["second_data"]
-            dias_possiveis = f"{first_data},{second_data}"
-            situacao = form.cleaned_data["situacao"]
+    pedidos = Pedidos_Exames.objects.filter(requerente=request.user)
+    lista_aprovados = []
 
-            Pedidos_Exames.objects.create(requerente=requerente,tipo_exame=tipo_exame,laudo=laudo,urgencia=urgencia,dias_possiveis=dias_possiveis,situacao=situacao)
+    for i in pedidos:
+        if i.situacao.situacao == "Aprovado":
+            lista_aprovados.append(i.id)
 
+    print(lista_aprovados)
     context = {
-        "form": form,
-        "user": user
+        'objetos': pedidos,
+        'aprovados': lista_aprovados
     }
 
-    return render(request, "registration/register copy.html", context)
+    return render(request, "paciente_pages/andamento.html", context)
 
 
 def register_user(request):

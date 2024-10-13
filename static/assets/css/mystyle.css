@@ -265,6 +265,14 @@
     margin-top: 2rem;
 }
 
+.my-autor-box{
+    margin-right: 1rem;
+}
+
+#lista_aprovados{
+    display: none;
+}
+
 .flex-tr{
     display: flex;
     

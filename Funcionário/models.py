@@ -105,7 +105,7 @@ class Pedidos_Exames(Base):
     tipo_exame = models.ForeignKey(Tipo_Exame, on_delete=models.CASCADE)
     laudo = models.FileField(upload_to="uploads_laudo/")
     dias_possiveis = models.CharField(max_length=50)
-    dia_marcado = models.DateField(blank=True, null=True)
+    dia_marcado = models.DateTimeField(blank=True, null=True)
     urgencia = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
 
