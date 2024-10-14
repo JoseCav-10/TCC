@@ -7,8 +7,8 @@
     <div class="section-header my-section-header">
       <h1>Em andamento</h1>
       <div class="section-header-breadcrumb">
-        <div class="breadcrumb-item active"><a href="#">home</a></div>
-        <div class="breadcrumb-item"><a href="#">em andamento</a></div>
+        <div class="breadcrumb-item active"><a href="{% url 'home' %}">home</a></div>
+        <div class="breadcrumb-item"><a href="{% url 'anda' %}">em andamento</a></div>
         <div class="breadcrumb-item">-</div>
       </div>
     </div>
@@ -27,7 +27,7 @@
           <div class="my-card card my-anda-card">
             <div class="card-header my-card-header">
               <p class="my-h4-anda">Atendimento presencial</p>
-              <form action=""><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
+              <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
             </div>
             <div class="card-body">
               
@@ -71,7 +71,7 @@
               </div>
 
               <div class="exc-anda">
-                <form action="">
+                <form action="{% url 'del_form' obj.pk %}">
                   <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>
               </div>
@@ -87,7 +87,7 @@
           <div class="my-card card my-anda-card">
             <div class="card-header my-card-header">
               <p class="my-h4-anda">Atendimento presencial</p>
-              <form action=""><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
+              <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
             </div>
             <div class="card-body">
               
@@ -116,7 +116,7 @@
               </div>
 
               <div class="exc-anda">
-                <form action="">
+                <form action="{% url 'del_form' obj.pk %}">
                   <button type="submit" class="btn btn-danger">Excluir</button>
                 </form>
               </div>

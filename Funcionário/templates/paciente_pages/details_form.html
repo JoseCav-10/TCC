@@ -8,8 +8,8 @@
       <h1>Agendamento</h1>
       <div class="section-header-breadcrumb">
         <div class="breadcrumb-item active"><a href="{% url 'home' %}">home</a></div>
-        <div class="breadcrumb-item"><a href="{% url 'form' %}">agendamento</a></div>
-        <div class="breadcrumb-item">-</div>
+        <div class="breadcrumb-item"><a href="{% url 'anda' %}">andamento</a></div>
+        <div class="breadcrumb-item"><a href='#'>detalhes do agendamento</a></div>
       </div>
   </div>
   
@@ -61,60 +61,100 @@
   <div class="row"></div>
     <div class="col-12 col-sm-12 col-lg-7 info-center">
       <div class=" card author-box card-primary m-card">
-        <form autocomplete="off" method="post" enctype="multipart/form-data" action="{% url 'form' %}">
+        <form autocomplete="off" method="get" action="{% url 'anda' %}">
           {% csrf_token %}
           <div >
             <h2 class="h-agend">Informações do agendamento</h2>
           </div>
 
-          <div class="invisible">{{ form.requerente }}</div>
 
           <div class="card-body">
             <div class="form-group">
               <label>Tipo do exame</label>
-              {{ form.tipo_exame }}
+              <div class="form-control bg-transparent">
+                <p>{{ pedidos.tipo_exame }}</p>
+              </div>
             </div>
           </div>
           
           <div class="card-body">
             <div class="form-group">
               <label>Laudo médico:</label>
-              {{ form.laudo }}
+              <div class="form-control bg-transparent">
+                <p><a href="{{ pedidos.laudo.url }}">Link do laudo</a></p>
+              </div>
             </div>
           </div>
           
+          {% if pedidos.dia_marcado %}
+
+          <div class="card-body">
+            <div class="form-group">
+                <label>Data marcada</label>
+                <div class="form-control bg-transparent">
+                <p>{{ pedidos.dia_marcado }}</p>
+                </div>
+            </div>
+          </div>
+
+          {% else %}
+
+
           <div class="card-body">
             <div class="form-group">
               <div class="phone-cep row mb-3">
                 <div class="my-col1 col">
                   <label for="first_data" class="form-label">Data1</label>
-                  <input type="date" name="first_data" id="id_first_data" class="form-control">
+                  <div class="form-control bg-transparent">
+                    <p id="getDias">{{ pedidos.dias_possiveis }}</p>
+                  </div>
                 </div>
     
                 <div class="my-col2 col">
                   <label for="second_data" class="form-label">Data2</label>
-                  <input type="date" name="second_data" id="id_second_data" class="form-control">
+                  <div class="form-control bg-transparent">
+                    <p id="dia_2">24/03/2024</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="invisible">{{ form.situacao }}</div>
+          {% endif %}
+
+          
+
+          
+          {% if pedidos.urgencia %}
+          <div class="card-body">
+            <div class="form-group">
+              <div class="control-label">Condição do exame</div>
+              <label class="custom-switch mt-2">
+                <div class="form-control bg-transparent">
+                    <p>Este exame é urgente</p>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {% else %}
 
           <div class="card-body">
             <div class="form-group">
               <div class="control-label">Condição do exame</div>
               <label class="custom-switch mt-2">
-                {{ form.urgencia }}
-                <span class="custom-switch-indicator"></span>
-                <span class="custom-switch-description">Este exame é urgente?</span>
+                <div class="form-control bg-transparent">
+                    <p>Este exame não é urgente</p>
+                </div>
               </label>
             </div>
           </div>
 
+          {% endif %}
+
           <div class="card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-              <button class="btn btn-primary me-md-2" type="submit">Enviar</button>
+              <button class="btn btn-primary me-md-2" type="submit">Voltar</button>
             </div>
           </div>
 
@@ -123,9 +163,7 @@
     </div>
   </div>
   
-  <script>
-    document.getElementById("id_requerente").value = "{{ user.id }}";
-    document.getElementById("id_situacao").value = "1";
-  </script>
+
+  <script src="{% static 'assets/js/details_form.js' %}"></script>
 
 {% endblock %}

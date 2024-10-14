@@ -1,11 +1,12 @@
 from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import CreateView
+from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic.edit import CreateView,DeleteView
 from Funcionário.models import CustomUsuario,Pedidos_Exames
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django import forms
+from django.urls import reverse_lazy
 from Funcionário.forms import CustomUsuarioCreateForm
 import os
 from Funcionário.forms import Pedidos_ExamesForm
@@ -60,12 +61,13 @@ def form_agendamento(request):
 
 
 
-class AndamentoView(ListView):
+class AndamentoView(LoginRequiredMixin, ListView):
     model = Pedidos_Exames
     template_name = "paciente_pages/andamento.html"  # Template a ser utilizado
     context_object_name = 'objetos'  # Nome do contexto para a lista de objetos
     paginate_by = 4
     ordering = "-id"
+    login_url = "/contas/login"
 
     def get_queryset(self):
         # Filtra os pedidos com base no usuário logado
@@ -79,6 +81,19 @@ class AndamentoView(ListView):
             pedido.id for pedido in context['objetos'] if pedido.situacao.situacao == "Aprovado"
         ]
         return context
+
+
+class DeleteFormView(DeleteView):
+    model = Pedidos_Exames
+    template_name = "paciente_pages/del_form.html"
+    success_url = reverse_lazy("anda")
+
+
+class DetailsPedidos_ExamesView(DetailView):
+    template_name = "paciente_pages/details_form.html"
+    model = Pedidos_Exames
+    context_object_name = "pedidos"
+    
 
 
 class Dados_PacienteView(TemplateView):
