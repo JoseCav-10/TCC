@@ -21,7 +21,10 @@
           </div>
           <div>
 
-            <a href="#modalrecusado" data-toggle="modal" class="a-noti">
+
+            {% for n in notificacao %}
+            {% if n.situacao.situacao == "Recusado" %}
+            <a href="#modalrecusado{{ n.id }}" data-toggle="modal" class="a-noti">
               <div class="notification">
                 <div class="title-horario">
                   <div class="title-noti">
@@ -29,32 +32,42 @@
                     <h1 class="recusado">Recusado</h1>
                   </div>
                   <div class="data-noti">
-                    <div class="dia-noti">15/01/2022</div>
-                    <div class="hora-noti">08:00</div>
+                    <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
+                    <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
                   </div>
                 </div>
                 <div class="recado-noti">
-                  <p>Seu exame de urina foi recusado pelo estabelecimento</p>
+                  <p>Seu exame de {{ n.pedido.tipo_exame }} foi recusado pelo estabelecimento</p>
                 </div>
               </div>
             </a>
 
-      
-            <div class="notification">
-              <div class="title-horario">
-                <div class="title-noti">
-                  <img src="{% static 'media/img/confere.png' %}" alt="exclamação">
-                  <h1 class="aprovado">Aprovado</h1>
+            
+            {% elif n.situacao.situacao == "Aprovado"  %}
+
+
+            <a href="#modalaprovado{{ n.id }}" data-toggle="modal" class="a-noti">
+              <div class="notification">
+                <div class="title-horario">
+                  <div class="title-noti">
+                    <img src="{% static 'media/img/confere.png' %}" alt="exclamação">
+                    <h1 class="aprovado">Aprovado</h1>
+                  </div>
+                  <div class="data-noti">
+                    <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
+                    <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
+                  </div>
                 </div>
-                <div class="data-noti">
-                  <div class="dia-noti">16/11/2042</div>
-                  <div class="hora-noti">09:42</div>
+                <div class="recado-noti">
+                  <p>Seu exame de {{ n.pedido.tipo_exame }} foi aprovado pelo estabelecimento e já está agendado</p>
                 </div>
               </div>
-              <div class="recado-noti">
-                <p>Seu exame de urina foi aprovado pelo estabelecimento e já está agendado</p>
-              </div>
-            </div>
+            </a>
+
+
+            {% endif %}
+            {% endfor %}
+
             
           </div>
         </div>
@@ -71,7 +84,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-title">Logado: {{ user.last_login }}</div>
-        <a href="{% url 'dado' %}" class="dropdown-item has-icon">
+        <a href="{% url 'meu' user.pk %}" class="dropdown-item has-icon">
           <i class="far fa-user"></i> Conta
         </a>
         <a href="{% url 'senha_f' %}" class="dropdown-item has-icon">
@@ -107,22 +120,26 @@
         <a href="{% url 'anda' %}" class="nav-link"><i class="fas fa-fire"></i><span>Em andamento</span></a>
       </li>
       <li class="nav-item active"></li>
-        <a href="{% url 'dado' %}" class="nav-link"><i class="far fa-user"></i><span>Meus Dados</span></a>
+        <a href="{% url 'meu' user.pk %}" class="nav-link"><i class="far fa-user"></i><span>Meus Dados</span></a>
       </li>
     </ul>
   </div>
 </nav>
 
+
+{% for n in notificacao %}
+{% if n.situacao.situacao == "Recusado" %}
+
 <!--Modal-->
-<div class="modal" tabindex="-1" id="modalrecusado">
+<div class="modal" tabindex="-1" id="modalrecusado{{ n.id }}">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Pedido de exame n°9823365 - Recusado</h5>
+        <h5 class="modal-title">Pedido de exame n°{{ n.pedido.id }} - Recusado</h5>
         <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here.</p>
+        <p>{{ n.conteudo }}.</p>
         <p><strong>Se ainda desejar fazer um agendamento, preencha outro formulário com as informações corretas</strong></p>
         <p>Outros meios de contato</p>
         <ul>
@@ -138,4 +155,35 @@
   </div>
 </div>
 <!--FimModal-->
+
+
+{% elif n.situacao.situacao == "Aprovado"  %}
+
+<!--Modal-->
+<div class="modal" tabindex="-1" id="modalaprovado{{ n.id }}">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pedido de exame n°{{ n.pedido.id }} - Aprovado</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Pedido Confirmado</strong></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <a href="{% url 'anda' %}" class="btn btn-primary">Verificar o pedido</a>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FimModal-->
+
+
+{% endif %}
+{% endfor %}
+
+
+
+
 {% endblock content %}

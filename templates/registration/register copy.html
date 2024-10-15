@@ -31,41 +31,37 @@
       <section class="section">
         <div class="container mt-5">
           <div class="row">
-            <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
+            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
               <div class="login-brand div-logo-entrada">
                 <img src="{% static 'media/img/logo.png' %}" alt="logo" class="shadow-light logo-entrada">
               </div>
   
               <div class="card card-primary">
-                <div class="card-header"><h4>Cadastro</h4></div>
+                <div class="card-header"><h4>Esqueceu a senha</h4></div>
   
                 <div class="card-body">
-                  <form class="form-meus-dados w-100 m-auto" autocomplete="off" method="post" enctype="multipart/form-data">
+                  <p class="text-muted">Preencha as informações abaixo para mudar a sua senha</p>
+                  <form method="post" autocomplete="off" action="">
+                    
                     {% csrf_token %}
-                    
-                    <div class="invisible">{{ form.requerente }}</div>
-                    <br><br>
-                    
-                    
-                    {{ form.tipo_exame }}
-                    {{ form.laudo }}
-
-                    
-
-                    <label for="first_data" class="form-label">Data1</label>
-                    <input type="date" name="first_data" id="" class="form-control">
-
-                    <label for="second_data" class="form-label">Data2</label>
-                    <input type="date" name="second_data" id="" class="form-control">
-
-                    <div class="invisible">{{ form.situacao }}</div>
-                    {{ form.urgencia }}
-
-                  
-                
                     <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-lg btn-block">
-                        Register
+                      <label for="cpf_id">CPF</label>
+                      <input id="cpf_id" type="text" class="form-control" name="cpf_name" tabindex="1" required autofocus >
+                    </div>
+
+                    <div class="form-group">
+                      <label for="new_password">Nova senha</label>
+                      <input id="new_password" type="password" class="form-control" name="new_password" tabindex="1" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="confirm_password">Confirmar senha</label>
+                      <input id="confirm_password" type="password" class="form-control" name="confirm_password" tabindex="1" required autofocus>
+                    </div>
+  
+                    <div class="form-group">
+                      <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
+                        Atualizar senha
                       </button>
                     </div>
                   </form>
@@ -82,11 +78,6 @@
     </div>
   </div>
 
-  <script>
-    document.getElementById("id_requerente").value = "{{ user.id }}";
-    document.getElementById("id_situacao").value = "1";
-  </script>
-  <script src="{% static 'assets/js/myscripts.js' %}"></script>
   <!-- General JS Scripts -->
   <script src="{% static 'sweetify/sweetify.js' %}"></script>
 

@@ -273,6 +273,21 @@
     display: none;
 }
 
+.img_meuDado{
+    border-radius: 100%;
+    width: 200px;
+    display: block;
+    margin: auto;
+}
+
+.center_meuDado{
+    margin: auto;
+}
+
+.inputFoto{
+    width: 50%;
+}
+
 .flex-tr{
     display: flex;
     
@@ -418,5 +433,13 @@
     
     .flex-tr{
         flex-direction: column;
+    }
+
+    .inputFoto{
+        width: 100%;
+    }
+
+    .ajustarTamanho{
+        margin-left: 0;
     }
 }

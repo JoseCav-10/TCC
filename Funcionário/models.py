@@ -72,8 +72,8 @@ class CustomUsuario(AbstractUser):
     objects = UsuarioManager()
 
 class Base(models.Model):
-    criado = models.DateField(auto_now_add=True)
-    modificado = models.DateField(auto_now=True)
+    criado = models.DateTimeField(auto_now_add=True)
+    modificado = models.DateTimeField(auto_now=True)
 
     class Meta:
         abstract = True
@@ -91,6 +91,7 @@ class Status_Exame(models.Model):
         ("Pendente", "Pendente"),
         ("Aprovado", "Aprovado"),
         ("Recusado", "Recusado"),
+        ("Concluído", "Concluído"),
     ]
     
     situacao = models.CharField(max_length=20, choices=EXAMES_CHOICES, default="Pendente")
@@ -114,6 +115,7 @@ class Pedidos_Exames(Base):
 
 class Notificacoes(Base):
     destinatario = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
+    pedido = models.ForeignKey(Pedidos_Exames,on_delete=models.CASCADE,blank=True,null=True)
     visualizacao = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
     conteudo = models.TextField(default="Pedido confirmado")

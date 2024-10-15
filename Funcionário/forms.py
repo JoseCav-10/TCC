@@ -36,8 +36,20 @@ class CustomUsuarioChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUsuario
-        fields = ("username", "name",'cpf','cartao_sus','data_nascimento','sexo','fone','endereco','cep', 'foto_perfil')
+        fields = ("name",'cpf','cartao_sus','data_nascimento','sexo','fone','endereco','cep', 'foto_perfil')
         labels = {"username": 'Username/E-mail'}
+        widgets = {
+            "name": forms.TextInput(attrs={"class": "form-control"}),
+            "cpf": forms.TextInput(attrs={"class": "form-control"}),
+            "cartao_sus": forms.TextInput(attrs={"class": "form-control"}),
+            "data_nascimento": forms.DateInput(attrs={"class": "form-control", "type": 'date'}),
+            "sexo": forms.Select(attrs={"class": "form-control"}),
+            "fone": forms.TextInput(attrs={"class": "form-control"}),
+            "endereco": forms.TextInput(attrs={"class": "form-control"}),
+            "cep": forms.TextInput(attrs={"class": "form-control"}),
+            
+
+        } 
 
 
 class Pedidos_ExamesForm(forms.ModelForm):

@@ -1,56 +1,62 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
-
-# Create your views here.
 from django.shortcuts import render,redirect
-from .forms import UserChangeForm,UserCreationForm,CustomUsuarioCreateForm,Pedidos_ExamesForm
-from django.contrib.auth import authenticate, login
-from .models import CustomUsuario,Pedidos_Exames
-
-
+from .forms import CustomUsuarioCreateForm,Pedidos_ExamesForm
+from django.urls import reverse_lazy
+from django.views import View
+from django.views.generic.edit import CreateView
+from django.contrib.auth import login, authenticate
+from .forms import CustomUsuarioCreateForm
+from .models import CustomUsuario,Pedidos_Exames,Notificacoes
 # Create your views here.
 
 
+class RegisterUserView(CreateView):
+    form_class = CustomUsuarioCreateForm
+    template_name = "registration/register.html"
+    success_url = reverse_lazy("home")  # URL para redirecionar após o sucesso
+
+    def form_valid(self, form):
+        user = form.save(commit=False)
+        user.set_password(form.cleaned_data["password1"])
+        user.email = form.cleaned_data["username"]
+        user.save()
+        
+        # Autentica e faz o login do usuário
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password1"]
+        user = authenticate(username=username, password=password)
+
+        if user is not None:
+            login(self.request, user)
+
+        return super().form_valid(form)
 
 
-def testes(request):
-    pedidos = Pedidos_Exames.objects.filter(requerente=request.user)
-    lista_aprovados = []
+class ForgotPasswordView(LoginRequiredMixin, View):
+    template_name = "forgot_password.html"
+    login_url = "login"
 
-    for i in pedidos:
-        if i.situacao.situacao == "Aprovado":
-            lista_aprovados.append(i.id)
+    def get(self, request):
+        return render(request, self.template_name)
 
-    print(lista_aprovados)
-    context = {
-        'objetos': pedidos,
-        'aprovados': lista_aprovados
-    }
+    def post(self, request):
+        usuario = CustomUsuario.objects.get(username=request.user)
+        cpf_input = request.POST.get("cpf_name")
+        new_password = request.POST.get("new_password")
+        confirm_password = request.POST.get("confirm_password")
 
-    return render(request, "paciente_pages/andamento.html", context)
+        if cpf_input == usuario.cpf and new_password == confirm_password:
+            usuario.set_password(new_password)
+            usuario.save()
+            return redirect("login")
+        else:
+            # Adicione uma mensagem de erro ou lógica adicional conforme necessário
+            print("ERRO")
+            return render(request, self.template_name)
 
 
-def register_user(request):
-    form = CustomUsuarioCreateForm()
-
-    if request.method == "POST":
-        form = CustomUsuarioCreateForm(request.POST, request.FILES)
-        print("oiiii")
-        if form.is_valid():
-            print("oiiii")
-            form.save()
-            username = request.POST["username"]
-            password = request.POST["password1"]
-            user = authenticate(request, username=username, password=password)
-
-            if user is not None:
-                login(request, user)
-                return redirect("home")
-
-    context = {
-        "form": form
-    }
-    return render(request, "registration/register.html", context)
-
+'''
 def forgot_password(request):
     if request.user.is_authenticated:
         print(request.user)
@@ -74,3 +80,4 @@ def forgot_password(request):
     
     else:
         return redirect("login")
+'''    
