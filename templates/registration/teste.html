@@ -1,126 +1,157 @@
+{% extends "bases/base_func.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
 
-<head>
-  <meta charset="UTF-8">
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Django Stisla</title>
+{% block content %}
 
-  <!-- General CSS Files -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<section class="section mh">
+  <div class="section-header header-section">
+      <h1>Agendar Exame</h1>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="{% url 'menu' %}">home</a></div>
+        <div class="breadcrumb-item"><a href="{% url 'pedidos' %}">pedidos</a></div>
+        <div class="breadcrumb-item"><a href="#">agendar exame</a></div>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class="card author-box card-primary">
+        <div class="card-body">
+          <div class="author-box-left">
+            <img alt="image" src="{{ pedido.requerente.foto_perfil.thumb.url }}" class="rounded-circle author-box-picture">
+            <div class="clearfix"></div>
+            <p href="#" class="btn btn-primary mt-3 follow-btn disable" data-follow-action="alert('follow clicked');" data-unfollow-action="alert('unfollow clicked');">{{ pedido.requerente.data_nascimento|date:"d/m/Y" }}</p>
+          </div>
 
+          <div class="author-box-details">
+            <div class="author-box-name">
+              <a href="#">{{ pedido.requerente.name }}</a>
+            </div>
+            <div class="author-box-job">{{ pedido.requerente.cpf }}</div>
+            <div class="author-box-description">
+              
+              
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Cartão SUS:</p>
+                  <small class="small">{{ pedido.requerente.cartao_sus }}</small>
+                </a>
 
-
-  <!-- Template CSS -->
-  <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/mystyle.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
-  <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
-  <!-- <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}"> -->
-</head>
-
-<body>
-  <div id="app">
-    <div class="main-wrapper main-wrapper-1">
-
-      <section class="section">
-        <div class="container mt-5">
-          <div class="row">
-            <div class="col-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-4 offset-xl-4">
-              <div class="login-brand div-logo-entrada">
-                <img src="{% static 'media/img/logo.png' %}" alt="logo" class="shadow-light logo-entrada">
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Endereço:</p>
+                  <small class="small">{{ pedido.requerente.endereco }}</small>
+                </a>
+  
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Telefone:</p>
+                  <small class="small">{{ pedido.requerente.fone }}</small>
+                </a>  
+        
               </div>
-  
-              <div class="card card-primary">
-                <div class="card-header"><h4>Esqueceu a senha</h4></div>
-  
-                <div class="card-body">
-                  <p class="text-muted">Preencha as informações abaixo para mudar a sua senha</p>
-                  <form method="post" autocomplete="off" action="">
-                    
-                    {% csrf_token %}
-                    <div class="form-group">
-                      <label for="cpf_id">CPF</label>
-                      <input id="cpf_id" type="text" class="form-control" name="cpf_name" tabindex="1" required autofocus >
-                    </div>
 
-                    <div class="form-group">
-                      <label for="new_password">Nova senha</label>
-                      <input id="new_password" type="password" class="form-control" name="new_password" tabindex="1" required autofocus>
-                    </div>
-
-                    <div class="form-group">
-                      <label for="confirm_password">Confirmar senha</label>
-                      <input id="confirm_password" type="password" class="form-control" name="confirm_password" tabindex="1" required autofocus>
-                    </div>
+            </div>
+          
+            <div class="w-100 d-sm-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   
-                    <div class="form-group">
-                      <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                        Atualizar senha
-                      </button>
-                    </div>
-                  </form>
+  <div class="row"></div>
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class=" card author-box card-primary m-card">
+        <form action="">
+
+          <div >
+            <h2 class="h-agend">Informações da requisição</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group">
+              <label>Tipo do exame:</label>
+              <h5>{{ pedido.tipo_exame }}</h5>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label for='formFile'>Laudo médico:</label>
+              <output type="file" class="form-control"><a href="{{ pedido.laudo.url }}">Arquivo</a></output>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label>Possíveis datas:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                  </div>
                 </div>
-              </div>
-              <div class="simple-footer">
-                Copyright &copy; Stisla 2018
+                <p class="form-control daterange-cus" id="getDatas">{{ pedido.dias_possiveis }} </p>
               </div>
             </div>
           </div>
-        </div>
-      </section>
 
+          <div class="card-body">
+            <div class="form-group">
+              <div class="control-label">Condição do exame</div>
+              <label class="custom-switch mt-2">
+                {% if pedido.urgencia %}
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" checked disabled>
+                {% else %}
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" disabled>
+                {% endif %}
+                <span class="custom-switch-indicator"></span>
+                <span class="custom-switch-description">Este exame é urgente?</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="#modalaprovado" data-toggle="modal" class="btn btn-primary" type="button" style="margin-right: 10px;">Aceitar</a>
+                <button class="btn btn-danger" type="button">Recusar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
     </div>
   </div>
-
-  <!-- General JS Scripts -->
-  <script src="{% static 'sweetify/sweetify.js' %}"></script>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-  </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
-
   
+<!--Modal-->
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+<div class="modal" tabindex="-1" id="modalaprovado">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmação do pedido de exame n°{{ pedido.id }} </h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Selecione a data para ser feito o exame:</strong></p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" name="embasamento" id="id_embasamento" value="confirmar" style="display: none;">
+          <select name="situacao" id="id_situacao" style="display: none;">
+            <option value="2">Aprovado</option>
+          </select>
+          <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
+          <label for="id_dia_marcado" class="label-control">Dia do exame</label>
+          <input class="form-control" type="date" name="dia_marcado" id="id_dia_marcado">
+          <button type="submit" class="btn btn-primary mt-3">Confirmar pedido</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <script src="{% static 'assets/js/stisla.js' %}"></script>
 
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<!--Fim-->
 
-  <!-- Template JS File -->
-  <script src="{% static 'assets/js/scripts.js' %}"></script>
-  <script src="{% static 'assets/js/custom.js' %}"></script>
+<script src="{% static 'assets/js/details_form_func.js' %}"></script>
 
-  <script src="{% static 'assets/js/forms-advanced-forms.js' %}"></script>
-  
-  <script src="{% static 'js/utils.js' %}"></script>
-  <script src="{% static 'js/jquery-1.2.6.pack.js' %}"></script>
-  <script src="{% static 'js/jquery.maskedinput-1.1.4.pack.js' %}"></script>
-
-
-  <!-- Page Specific JS File -->
-  <!-- <script src="{% static 'assets/js/page/index-0.js' %}"></script> -->
-  <!-- <script src="{% static 'assets/js/page/bootstrap.modal.js' %}"></script> -->
-  <!-- <script src="{% static 'assets/js/jquery.js' %}"></script> -->
-  <!-- <script src="{% static 'assets/js/bootstrap.min.js' %}"></script> -->
-</body>
-
-</html>
+{% endblock %}

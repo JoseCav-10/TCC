@@ -113,7 +113,7 @@
           <div class="card-body">
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <a href="#modalaprovado" data-toggle="modal" class="btn btn-primary" type="button" style="margin-right: 10px;">Aceitar</a>
-                <button class="btn btn-danger" type="button">Recusar</button>
+                <a href="#modalrecusado" data-toggle="modal" class="btn btn-danger" type="button">Recusar</a>
             </div>
           </div>
 
@@ -135,21 +135,47 @@
         <p>Selecione a data para ser feito o exame:</strong></p>
         <form action="" method="post">
           {% csrf_token %}
-          <input type="text" name="embasamento" id="id_embasamento" value="confirmar" style="display: none;">
-          <select name="situacao" id="id_situacao" style="display: none;">
+          <input type="text" disabled name="embasamento" id="id_embasamento_aprovar" value="confirmar" style="display: none;">
+          <select name="situacao" disabled id="id_situacao_aprovar" style="display: none;">
             <option value="2">Aprovado</option>
           </select>
           <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
           <label for="id_dia_marcado" class="label-control">Dia do exame</label>
-          <input class="form-control" type="date" name="dia_marcado" id="id_dia_marcado">
+          <input class="form-control" type="datetime-local" name="dia_marcado" id="id_dia_marcado">
           <button type="submit" class="btn btn-primary mt-3">Confirmar pedido</button>
         </form>
       </div>
     </div>
   </div>
 </div>
+<!--Fim-->
 
 
+<!--Modal-->
+<div class="modal" tabindex="-1" id="modalrecusado">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Rejeição do pedido de exame n°{{ pedido.id }} </h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Digite o motivo que o leva a recusar este pedido:</strong></p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" disabled name="embasamento" id="id_embasamento_recusar" value="recusar" style="display: none;">
+          <select name="situacao" id="id_situacao_recusar" style="display: none;" disabled>
+            <option value="3">Recusado</option>
+          </select>
+          <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
+          <label for="id_dia_marcado" class="label-control">Motivo</label>
+          <textarea style="height: 200px;" class="form-control" name="motivo" id="motivo_id"></textarea>
+          <button type="submit" class="btn btn-primary mt-3">Rejeitar pedido</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 <!--Fim-->
 
 <script src="{% static 'assets/js/details_form_func.js' %}"></script>

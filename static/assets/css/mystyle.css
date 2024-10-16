@@ -379,6 +379,13 @@
     box-shadow: 1px 1px  10px rgba(0, 0, 0, 0.216);
 }
 
+.my-barra-rol{
+    height: 300px;
+    width: 340px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
 @media (max-width: 1024px) {
     .my-col-func{
         grid-template-columns: repeat(1, 1fr);
