@@ -1,0 +1,157 @@
+{% extends "bases/base_func.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="section mh">
+  <div class="section-header header-section">
+      <h1>Agendar Exame</h1>
+      <div class="section-header-breadcrumb">
+        <div class="breadcrumb-item active"><a href="{% url 'menu' %}">home</a></div>
+        <div class="breadcrumb-item"><a href="{% url 'pedidos' %}">pedidos</a></div>
+        <div class="breadcrumb-item"><a href="#">agendar exame</a></div>
+      </div>
+  </div>
+  
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class="card author-box card-primary">
+        <div class="card-body">
+          <div class="author-box-left">
+            <img alt="image" src="{{ pedido.requerente.foto_perfil.thumb.url }}" class="rounded-circle author-box-picture">
+            <div class="clearfix"></div>
+            <p href="#" class="btn btn-primary mt-3 follow-btn disable" data-follow-action="alert('follow clicked');" data-unfollow-action="alert('unfollow clicked');">{{ pedido.requerente.data_nascimento|date:"d/m/Y" }}</p>
+          </div>
+
+          <div class="author-box-details">
+            <div class="author-box-name">
+              <a href="#">{{ pedido.requerente.name }}</a>
+            </div>
+            <div class="author-box-job">{{ pedido.requerente.cpf }}</div>
+            <div class="author-box-description">
+              
+              
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Cartão SUS:</p>
+                  <small class="small">{{ pedido.requerente.cartao_sus }}</small>
+                </a>
+
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Endereço:</p>
+                  <small class="small">{{ pedido.requerente.endereco }}</small>
+                </a>
+  
+                <a href="#" class="list-group-item list-group-item-action" aria-current="true">
+                  <p class="mb-1 p-strong">Telefone:</p>
+                  <small class="small">{{ pedido.requerente.fone }}</small>
+                </a>  
+        
+              </div>
+
+            </div>
+          
+            <div class="w-100 d-sm-none"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row"></div>
+    <div class="col-12 col-sm-12 col-lg-7 info-center">
+      <div class=" card author-box card-primary m-card">
+        <form action="">
+
+          <div >
+            <h2 class="h-agend">Informações da requisição</h2>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group">
+              <label>Tipo do exame:</label>
+              <h5>{{ pedido.tipo_exame }}</h5>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label for='formFile'>Laudo médico:</label>
+              <output type="file" class="form-control"><a href="{{ pedido.laudo.url }}">Arquivo</a></output>
+            </div>
+          </div>
+          
+          <div class="card-body">
+            <div class="form-group">
+              <label>Possíveis datas:</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-calendar"></i>
+                  </div>
+                </div>
+                <p class="form-control daterange-cus" id="getDatas">{{ pedido.dias_possiveis }} </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group">
+              <div class="control-label">Condição do exame</div>
+              <label class="custom-switch mt-2">
+                {% if pedido.urgencia %}
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" checked disabled>
+                {% else %}
+                <input type="checkbox" name="custom-switch-checkbox" class="custom-switch-input" disabled>
+                {% endif %}
+                <span class="custom-switch-indicator"></span>
+                <span class="custom-switch-description">Este exame é urgente?</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a href="#modalaprovado" data-toggle="modal" class="btn btn-primary" type="button" style="margin-right: 10px;">Aceitar</a>
+                <button class="btn btn-danger" type="button">Recusar</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+  
+<!--Modal-->
+
+<div class="modal" tabindex="-1" id="modalaprovado">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmação do pedido de exame n°{{ pedido.id }} </h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Selecione a data para ser feito o exame:</strong></p>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="text" name="embasamento" id="id_embasamento" value="confirmar" style="display: none;">
+          <select name="situacao" id="id_situacao" style="display: none;">
+            <option value="2">Aprovado</option>
+          </select>
+          <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
+          <label for="id_dia_marcado" class="label-control">Dia do exame</label>
+          <input class="form-control" type="date" name="dia_marcado" id="id_dia_marcado">
+          <button type="submit" class="btn btn-primary mt-3">Confirmar pedido</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Fim-->
+
+<script src="{% static 'assets/js/details_form_func.js' %}"></script>
+
+{% endblock %}

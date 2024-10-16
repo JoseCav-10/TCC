@@ -1,0 +1,66 @@
+{% block content %}
+{% load static %}
+
+<div class="navbar-bg">
+<nav class="navbar navbar-expand-lg main-navbar">
+  <form class="form-inline mr-auto">
+    <div>
+      <img class="img-logo" src="{% static 'media/img/logo.png' %}" alt="logo">
+    </div>
+    <div class="search-element">
+      <h1 class="title-h1">PortalExames</h1>
+    </div>
+  </form>
+  <ul class="navbar-nav navbar-right">
+    <li class="dropdown">
+      <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+        <img alt="image" src="{{ user.foto_perfil.thumb.url }}" class="rounded-circle mr-1">
+        <div class="d-sm-none d-lg-inline-block">{{ user.name }}</div>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right">
+        <div class="dropdown-title">Logado: {{ user.last_login }}</div>
+        <a href="{% url 'meu' user.pk %}" class="dropdown-item has-icon">
+          <i class="far fa-user"></i> Conta
+        </a>
+        <a href="{% url 'senha_f' %}" class="dropdown-item has-icon">
+          <i class="fas fa-cog"></i> Mudar senha
+        </a>
+        <div class="dropdown-divider"></div>
+    
+        <form action="{% url 'logout' %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="dropdown-item has-icon text-danger my-b-logout">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </button>
+        </form>
+          
+        
+      </div>
+    </li>
+  </ul>
+</nav>
+</div>
+
+
+<nav class="navbar-my navbar-secondary navbar-expand-lg">
+  <div class="container container-ul">
+    <ul class="navbar-nav space-nav ul-navbar">
+      <li class="nav-item active"></li>
+        <a href="{% url 'menu' %}" class="nav-link"><i class="fas fa-home"></i><span>Home</span></a>
+      </li>
+
+      <li class="nav-item active"></li>
+        <a href="{% url 'pedidos' %}" class="nav-link"><i class="far fa-envelope"></i><span>Pedidos</span></a>
+      </li>
+
+      <li class="nav-item active">
+        <a href="{% url 'calendario' %}" class="nav-link"><i class="fas fa-fire"></i><span>Calendário</span></a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+
+
+{% endblock content %}

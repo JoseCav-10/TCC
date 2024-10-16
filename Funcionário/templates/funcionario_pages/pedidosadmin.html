@@ -1,0 +1,57 @@
+{% extends "bases/base_func.html" %}
+{% load static %}
+
+{% block content %}
+    <section class="section">
+      <div class="section-header header-section">
+        <h1>Pedidos</h1>
+        <div class="section-header-breadcrumb">
+          <div class="breadcrumb-item active"><a href="{% url 'menu' %}">Home</a></div>
+          <div class="breadcrumb-item"><a href="#">Pedidos</a></div>
+          <div class="breadcrumb-item">-</div>
+        </div>
+      </div>
+      <div class="section-body">
+        <h2 class="section-title">Pedidos</h2>
+        <p class="section-lead">
+          Veja os pedidos dos pacientes aqui.
+        </p>
+        <div class="my-col-func">
+          
+          {% for p in pedidos %}
+          <div class="row">
+            <div class="my-width-col col-12 col-md-4">
+              <div class="my-color-modal  modal-dialog m-3" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">{{ p.tipo_exame }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Paciente: {{ p.requerente.name }}</p>
+                    <p>CPF: {{ p.requerente.cpf }}</p>
+                    <p>SUS: {{ p.requerente.cartao_sus }}</p>
+                  </div>
+                  <div class="modal-footer">
+                    {% if p.urgencia %}
+                    <p>Este exame exige <strong>urgência</strong>!</p>
+                    {% endif %}
+                    <a href="{% url 'form_func' p.pk %}" class="btn btn-primary">Ver mais</a>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+
+        </div>
+        
+      </div>
+    </section>
+                          
+                      
+
+{% endblock content %}

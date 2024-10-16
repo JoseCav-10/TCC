@@ -1,13 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.shortcuts import render,redirect
-from .forms import CustomUsuarioCreateForm,Pedidos_ExamesForm
+from .forms import CustomUsuarioCreateForm
 from django.urls import reverse_lazy
 from django.views import View
+from django.views.generic import TemplateView,ListView,DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
 from .forms import CustomUsuarioCreateForm
-from .models import CustomUsuario,Pedidos_Exames,Notificacoes
+from .models import CustomUsuario,Pedidos_Exames
 # Create your views here.
 
 
@@ -34,7 +36,7 @@ class RegisterUserView(CreateView):
 
 
 class ForgotPasswordView(LoginRequiredMixin, View):
-    template_name = "forgot_password.html"
+    template_name = "registration/forgot_password.html"
     login_url = "login"
 
     def get(self, request):
@@ -56,6 +58,38 @@ class ForgotPasswordView(LoginRequiredMixin, View):
             return render(request, self.template_name)
 
 
+class CalendarioView(TemplateView):
+    template_name = "funcionario_pages/calendario.html"
+
+
+class FormFuncionarioView(LoginRequiredMixin, DetailView):
+    template_name = "funcionario_pages/formularioadmin.html"
+    model = Pedidos_Exames
+    context_object_name = "pedido"
+    login_url = "contas/login"
+
+
+
+class MenuFuncionarioView(LoginRequiredMixin, View):
+    template_name = "funcionario_pages/menuadmin.html"
+    login_url = "login"
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name)
+
+
+
+class PedidoAFuncionarioView(LoginRequiredMixin, ListView):
+    template_name = "funcionario_pages/pedidosadmin.html"
+    model = Pedidos_Exames
+    context_object_name = "pedidos"
+
+    def get_queryset(self):
+        pedidos = Pedidos_Exames.objects.filter(situacao=1)
+        print(pedidos)
+
+        return pedidos
+    
 '''
 def forgot_password(request):
     if request.user.is_authenticated:

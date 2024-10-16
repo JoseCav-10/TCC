@@ -360,8 +360,29 @@
     text-align: center;
 }
 
+.home-row-func{
+    justify-content: center;
+}
+
+.my-col-func{
+    display: grid;
+    
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.my-width-col{
+    width: 480px;
+}
+
+.my-color-modal{
+    background-color: white;
+    box-shadow: 1px 1px  10px rgba(0, 0, 0, 0.216);
+}
+
 @media (max-width: 1024px) {
-   
+    .my-col-func{
+        grid-template-columns: repeat(1, 1fr);
+    }
     
 
     .card .card-body{
@@ -441,5 +462,11 @@
 
     .ajustarTamanho{
         margin-left: 0;
+    }
+}
+
+@media (max-width: 560px){
+    .my-width-col{
+        width: 100%;
     }
 }

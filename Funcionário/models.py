@@ -57,7 +57,7 @@ class CustomUsuario(AbstractUser):
     fone = models.CharField("Telefone", max_length=30, blank=True, null=True, default=None) 
     endereco = models.CharField("Endereço", max_length=255, blank=True, null=True, default=None)
     cep = models.CharField("CEP", max_length=9, blank=True, null=True, default=None)
-    foto_perfil = StdImageField(upload_to=get_file_path, variations={'thumb': {"width": 30, "height": 30, "crop": True}}, default="img/default.png", blank=True, null=True)
+    foto_perfil = StdImageField(upload_to=get_file_path, variations={'thumb': {"width": 100, "height": 100, "crop": True}}, default="img/default.png", blank=True, null=True)
     is_staff = models.BooleanField("Membro da Equipe", default=False)
 
     USERNAME_FIELD = 'email'
