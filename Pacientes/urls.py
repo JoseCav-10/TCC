@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from .views import FormAgendamentoView,AndamentoView,HomeView,DeleteFormView,DetailsPedidosExamesView,MeusDadosView
 from Funcionário.views import ForgotPasswordView
 urlpatterns = [

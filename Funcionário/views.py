@@ -1,12 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db.models.query import QuerySet
-from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.shortcuts import render,redirect
 from .forms import CustomUsuarioCreateForm
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import TemplateView,ListView,DetailView
+from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login, authenticate
 from .forms import CustomUsuarioCreateForm
@@ -219,29 +217,3 @@ class PedidoAFuncionarioView(LoginRequiredMixin, ListView):
 
         return pedidos
 
-#Falta: feito(paginação), filtro, concluir    
-'''
-def forgot_password(request):
-    if request.user.is_authenticated:
-        print(request.user)
-        usuario = CustomUsuario.objects.get(username=request.user)
-        print(usuario)
-        if request.method == 'POST':
-            cpf_input = request.POST.get("cpf_name")
-            new_password = request.POST.get("new_password")
-            confirm_password = request.POST.get("confirm_password")
-            print(cpf_input)
-            print(usuario.cpf)
-            if (cpf_input == usuario.cpf and new_password==confirm_password):
-                usuario.set_password(new_password)
-                usuario.save()
-                return redirect("login")
-            else:
-                print("ERRO")
-
-
-        return render(request, "forgot_password.html")
-    
-    else:
-        return redirect("login")
-'''    

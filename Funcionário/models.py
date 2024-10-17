@@ -71,6 +71,7 @@ class CustomUsuario(AbstractUser):
 
     objects = UsuarioManager()
 
+
 class Base(models.Model):
     criado = models.DateTimeField(auto_now_add=True)
     modificado = models.DateTimeField(auto_now=True)
@@ -111,8 +112,6 @@ class Pedidos_Exames(Base):
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
 
     
-
-
 class Notificacoes(Base):
     destinatario = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
     pedido = models.ForeignKey(Pedidos_Exames,on_delete=models.CASCADE,blank=True,null=True)

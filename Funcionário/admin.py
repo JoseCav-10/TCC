@@ -21,6 +21,7 @@ class NotificacoesAdmin(admin.ModelAdmin):
 
 admin.site.register(Notificacoes, NotificacoesAdmin)
 
+
 @admin.register(CustomUsuario)
 class CustomUsuarioAdmin(UserAdmin): 
     add_form = CustomUsuarioCreateForm
