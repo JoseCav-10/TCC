@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login,authenticate
 from .forms import CustomUsuarioCreateForm
 from .models import CustomUsuario,Pedidos_Exames,Notificacoes,Status_Exame
 # Create your views here.
@@ -37,9 +37,8 @@ class RegisterUserView(CreateView):
         return super().form_valid(form)
 
 
-class ForgotPasswordView(LoginRequiredMixin, View):
+class ForgotPasswordView(View):
     template_name = "registration/forgot_password.html"
-    login_url = "login"
 
     def get(self, request):
         return render(request, self.template_name)
