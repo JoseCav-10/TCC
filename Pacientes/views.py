@@ -113,12 +113,14 @@ class AndamentoView(LoginRequiredMixin, ListView):
     template_name = "paciente_pages/andamento.html"  # Template a ser utilizado
     context_object_name = 'objetos'  # Nome do contexto para a lista de objetos
     paginate_by = 4
-    ordering = "-id"
+    ordering = "id"
     login_url = "/contas/login"
 
     def get_queryset(self):
         # Filtra os pedidos com base no usuário logado
-        return super().get_queryset().filter(requerente=self.request.user)
+        filtrado = super().get_queryset().filter(requerente=self.request.user)
+        
+        return filtrado 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -127,6 +129,8 @@ class AndamentoView(LoginRequiredMixin, ListView):
         context['aprovados'] = [
             pedido.id for pedido in context['objetos'] if pedido.situacao.situacao == "Aprovado"
         ]
+
+        print(context['aprovados'])
 
         model = Notificacoes
         notificacoes = model.objects.filter(destinatario=self.request.user)

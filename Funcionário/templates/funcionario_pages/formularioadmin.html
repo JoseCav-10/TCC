@@ -135,8 +135,8 @@
         <p>Selecione a data para ser feito o exame:</strong></p>
         <form action="" method="post">
           {% csrf_token %}
-          <input type="text" disabled name="embasamento" id="id_embasamento_aprovar" value="confirmar" style="display: none;">
-          <select name="situacao" disabled id="id_situacao_aprovar" style="display: none;">
+          <input type="text"  name="embasamento" id="id_embasamento_aprovar" value="confirmar" style="display: none;">
+          <select name="situacao"  id="id_situacao_aprovar" style="display: none;">
             <option value="2">Aprovado</option>
           </select>
           <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
@@ -163,10 +163,12 @@
         <p>Digite o motivo que o leva a recusar este pedido:</strong></p>
         <form action="" method="post">
           {% csrf_token %}
-          <input type="text" disabled name="embasamento" id="id_embasamento_recusar" value="recusar" style="display: none;">
-          <select name="situacao" id="id_situacao_recusar" style="display: none;" disabled>
+
+          <input type="text" name="embasamento" id="id_embasamento_recusar" value="recusar" style="display: none;">
+          <select name="situacao" id="id_situacao_recusar" style="display: none;" >
             <option value="3">Recusado</option>
           </select>
+          
           <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
           <label for="id_dia_marcado" class="label-control">Motivo</label>
           <textarea style="height: 200px;" class="form-control" name="motivo" id="motivo_id"></textarea>

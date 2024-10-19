@@ -169,6 +169,8 @@ class FormFuncionarioView(LoginRequiredMixin, DetailView):
 
         embasar = request.POST.get("embasamento")
         situ = request.POST.get("situacao")
+        print("###########", embasar,"##################")
+        print("###########", situ,"##################")
         situacao = Status_Exame.objects.get(id=situ)
         print(situacao)
         

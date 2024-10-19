@@ -22,110 +22,110 @@
       <div class="row my-col-2">
         {% for obj in objetos %}
 
-        {% if obj.situacao.situacao == "Aprovado" %}
-        <div class="my-col-space col-12 col-sm-6 col-lg-4">
-          <div class="my-card card my-anda-card">
-            <div class="card-header my-card-header">
-              <p class="my-h4-anda">Atendimento presencial</p>
-              <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
-            </div>
-            <div class="card-body">
-              
-              <div class="horario-identifi">
-                <div class="data-anda">
-                  <div class="div1">{{ obj.dia_marcado|date:"d" }}</div>
-                  <div class="div2" id="mes_agendado{{ obj.id }}">{{ obj.dia_marcado|date:"m" }}</div>
-                  <div class="div3">{{ obj.dia_marcado|date:"Y" }}</div>
+          {% if obj.situacao.situacao == "Aprovado" %}
+          <div class="my-col-space col-12 col-sm-6 col-lg-4">
+            <div class="my-card card my-anda-card">
+              <div class="card-header my-card-header">
+                <p class="my-h4-anda">Atendimento presencial</p>
+                <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
+              </div>
+              <div class="card-body">
+                
+                <div class="horario-identifi">
+                  <div class="data-anda">
+                    <div class="div1">{{ obj.dia_marcado|date:"d" }}</div>
+                    <div class="div2" id="mes_agendado{{ obj.id }}">{{ obj.dia_marcado|date:"m" }}</div>
+                    <div class="div3">{{ obj.dia_marcado|date:"Y" }}</div>
+                  </div>
+
+                  <div class="hora-id-anda">
+                    <div class="hora">
+                      <p class="p-light-anda"><strong>Horário:</strong></p>
+                      <p>{{ obj.dia_marcado|date:"H:i" }}</p>
+                    </div>
+                    <div class="id">
+                      <p class="p-light-anda"><strong>Identificação do exame:</strong></p>
+                      <p>{{ obj.id }}</p>
+                    </div>
+                  </div>
+
                 </div>
 
-                <div class="hora-id-anda">
+                <div class="cidade-anda">
+                  <p class="p-cidade-anda">Portalegre</p>
+                </div>
+
+                <div class="descri-situ">
+                  
                   <div class="hora">
-                    <p class="p-light-anda"><strong>Horário:</strong></p>
-                    <p>{{ obj.dia_marcado|date:"H:i" }}</p>
+                    <p class="p-light-anda"><strong>Descrição:</strong></p>
+                    <p>{{ obj.tipo_exame }}</p>
                   </div>
+
                   <div class="id">
-                    <p class="p-light-anda"><strong>Identificação do exame:</strong></p>
-                    <p>{{ obj.id }}</p>
+                    <p class="p-light-anda"><strong>Situação:</strong></p>
+                    <p>Agendado</p>
                   </div>
-                </div>
-
-              </div>
-
-              <div class="cidade-anda">
-                <p class="p-cidade-anda">Portalegre</p>
-              </div>
-
-              <div class="descri-situ">
                 
-                <div class="hora">
-                  <p class="p-light-anda"><strong>Descrição:</strong></p>
-                  <p>{{ obj.tipo_exame }}</p>
+
                 </div>
 
-                <div class="id">
-                  <p class="p-light-anda"><strong>Situação:</strong></p>
-                  <p>Agendado</p>
+                <div class="exc-anda">
+                  <form action="{% url 'del_form' obj.pk %}">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                  </form>
                 </div>
-              
-
+                
               </div>
-
-              <div class="exc-anda">
-                <form action="{% url 'del_form' obj.pk %}">
-                  <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
-              </div>
-              
             </div>
           </div>
-        </div>
 
-        
-        {% elif obj.situacao.situacao == "Pendente" %}
+          
+          {% elif obj.situacao.situacao == "Pendente" %}
 
-        <div class="my-col-space col-12 col-sm-6 col-lg-4">
-          <div class="my-card card my-anda-card">
-            <div class="card-header my-card-header">
-              <p class="my-h4-anda">Atendimento presencial</p>
-              <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
-            </div>
-            <div class="card-body">
-              
-              <div class="horario-identifi">
-                <p class="espera">A definir</p>
-
+          <div class="my-col-space col-12 col-sm-6 col-lg-4">
+            <div class="my-card card my-anda-card">
+              <div class="card-header my-card-header">
+                <p class="my-h4-anda">Atendimento presencial</p>
+                <form action="{% url 'detail' obj.pk %}"><button type="submit" class="btn btn-icon btn-secondary"><i class="fas fa-info-circle"></i></button></form>
               </div>
-
-              <div class="cidade-anda">
-                <p class="p-cidade-anda">Portalegre</p>
-              </div>
-
-              <div class="descri-situ">
+              <div class="card-body">
                 
-                <div class="hora">
-                  <p class="p-light-anda"><strong>Descrição:</strong></p>
-                  <p>{{ obj.tipo_exame }}</p>
+                <div class="horario-identifi">
+                  <p class="espera">A definir</p>
+
                 </div>
 
-                <div class="id">
-                  <p class="p-light-anda"><strong>Situação:</strong></p>
-                  <p>Pendente</p>
+                <div class="cidade-anda">
+                  <p class="p-cidade-anda">Portalegre</p>
                 </div>
-              
 
-              </div>
+                <div class="descri-situ">
+                  
+                  <div class="hora">
+                    <p class="p-light-anda"><strong>Descrição:</strong></p>
+                    <p>{{ obj.tipo_exame }}</p>
+                  </div>
 
-              <div class="exc-anda">
-                <form action="{% url 'del_form' obj.pk %}">
-                  <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
+                  <div class="id">
+                    <p class="p-light-anda"><strong>Situação:</strong></p>
+                    <p>Pendente</p>
+                  </div>
+                
+
+                </div>
+
+                <div class="exc-anda">
+                  <form action="{% url 'del_form' obj.pk %}">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                  </form>
+                </div>
+                
               </div>
-              
             </div>
           </div>
-        </div>
 
-        {% endif %}
+          {% endif %}
         {% endfor %}
       </div>
 
