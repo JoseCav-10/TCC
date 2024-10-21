@@ -22,9 +22,9 @@
     border-radius: 100%;
     width: 160px;
     padding: 0.5rem;
-
-    
 }
+
+
 
 .small{
     text-indent: 10rem;
@@ -89,7 +89,7 @@
 .main-content{
     padding-top: 50px;
     padding-left: 30px;
-    min-height: 60vh;
+    min-height: 70vh;
 }
 
 .a-footer{

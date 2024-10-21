@@ -1,4 +1,5 @@
 from django.views.generic import ListView,DetailView
+from django.shortcuts import redirect
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from Funcionário.models import CustomUsuario,Pedidos_Exames,Notificacoes
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -74,7 +75,6 @@ class FormAgendamentoView(LoginRequiredMixin,CreateView):
     template_name = "paciente_pages/fomu.html"
     context_object_name = "user"
     form_class = Pedidos_ExamesForm
-    success_url = reverse_lazy("form")
     login_url = "/contas/login"
 
     def get_context_data(self, **kwargs):
@@ -89,6 +89,11 @@ class FormAgendamentoView(LoginRequiredMixin,CreateView):
 
         return context
     
+    def get_success_url(self):
+
+        return reverse_lazy("anda")
+    
+    
     def form_valid(self, form):
         print("VALIDO")
         tipo_exame = form.cleaned_data['tipo_exame']
@@ -100,18 +105,17 @@ class FormAgendamentoView(LoginRequiredMixin,CreateView):
         dias_possiveis = f"{first_data},{second_data}"
         situacao = form.cleaned_data["situacao"]
 
-        print(tipo_exame,requerente)
-
+        
         Pedidos_Exames.objects.create(requerente=requerente,tipo_exame=tipo_exame,laudo=laudo,urgencia=urgencia,dias_possiveis=dias_possiveis,situacao=situacao)
-
-        return super().form_valid(form)
+        print("Pedido feito")
+        return redirect(self.get_success_url())
 
 
 class AndamentoView(LoginRequiredMixin, ListView):
     model = Pedidos_Exames
     template_name = "paciente_pages/andamento.html"  # Template a ser utilizado
     context_object_name = 'objetos'  # Nome do contexto para a lista de objetos
-    paginate_by = 4
+    paginate_by = 6
     ordering = "id"
     login_url = "/contas/login"
 
@@ -128,8 +132,6 @@ class AndamentoView(LoginRequiredMixin, ListView):
         context['aprovados'] = [
             pedido.id for pedido in context['objetos'] if pedido.situacao.situacao == "Aprovado"
         ]
-
-        print(context['aprovados'])
 
         model = Notificacoes
         notificacoes = model.objects.filter(destinatario=self.request.user)
