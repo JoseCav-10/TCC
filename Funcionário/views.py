@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render
 from django.shortcuts import render,redirect
 from .forms import CustomUsuarioCreateForm
 from django.urls import reverse_lazy
@@ -7,7 +6,6 @@ from django.views import View
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login,authenticate
-from .forms import CustomUsuarioCreateForm
 from .models import CustomUsuario,Pedidos_Exames,Notificacoes,Status_Exame
 # Create your views here.
 
@@ -169,10 +167,9 @@ class FormFuncionarioView(LoginRequiredMixin, DetailView):
 
         embasar = request.POST.get("embasamento")
         situ = request.POST.get("situacao")
-        print("###########", embasar,"##################")
-        print("###########", situ,"##################")
+        
         situacao = Status_Exame.objects.get(id=situ)
-        print(situacao)
+        
         
         if embasar == "confirmar":
             dia_marcado = request.POST.get("dia_marcado")

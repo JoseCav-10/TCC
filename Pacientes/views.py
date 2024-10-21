@@ -1,11 +1,10 @@
 from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from Funcionário.models import CustomUsuario,Pedidos_Exames,Notificacoes
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse_lazy, reverse
-from Funcionário.forms import CustomUsuarioChangeForm
-from Funcionário.forms import Pedidos_ExamesForm
+from django.urls import reverse_lazy,reverse
+from Funcionário.forms import CustomUsuarioChangeForm,Pedidos_ExamesForm
 # Create your views here.
 
 
