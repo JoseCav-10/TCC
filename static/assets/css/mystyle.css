@@ -24,8 +24,6 @@
     padding: 0.5rem;
 }
 
-
-
 .small{
     text-indent: 10rem;
 }
@@ -99,6 +97,12 @@
 .container{
     margin-left: 2rem;
     margin-right: 2rem;
+}
+
+.my-login-container{
+    margin-left: 0;
+    margin-right: 0;
+    margin: auto;
 }
 
 .div1{
