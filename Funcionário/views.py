@@ -7,6 +7,7 @@ from django.views.generic import ListView,DetailView
 from django.views.generic.edit import CreateView
 from django.contrib.auth import login,authenticate
 from .models import CustomUsuario,Pedidos_Exames,Notificacoes,Status_Exame
+from django.contrib.auth.models import Group
 # Create your views here.
 
 
@@ -16,21 +17,31 @@ class RegisterUserView(CreateView):
     success_url = reverse_lazy("home")  # URL para redirecionar após o sucesso
 
     def form_valid(self, form):
+        
         user = form.save(commit=False)
         user.set_password(form.cleaned_data["password1"])
         user.email = form.cleaned_data["username"]
         user.save()
         
+
+        try:
+            pacientes_group = Group.objects.get(name='pacientes')
+            pacientes_group.user_set.add(user)
+        except Group.DoesNotExist:
+            # Lide com o caso em que o grupo não existe, se necessário
+            print("Grupo 'pacientes' não encontrado.")
+
+
         # Autentica e faz o login do usuário
         username = form.cleaned_data["username"]
         password = form.cleaned_data["password1"]
         user = authenticate(username=username, password=password)
 
         if user is not None:
-            print("ok")
+           
             login(self.request, user)
-            print(self.request.user)
-            redirect("home")
+           
+            return redirect("home")
 
         return super().form_valid(form)
 
