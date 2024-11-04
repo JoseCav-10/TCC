@@ -1,5 +1,6 @@
-from django.views.generic import ListView,DetailView
-from django.shortcuts import redirect
+from django.http import HttpRequest, HttpResponse
+from django.views.generic import ListView,DetailView,View
+from django.shortcuts import redirect,render
 from django.views.generic.edit import CreateView,DeleteView,UpdateView
 from Funcionário.models import CustomUsuario,Pedidos_Exames,Notificacoes
 from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
@@ -10,26 +11,30 @@ from Funcionário.forms import CustomUsuarioChangeForm,Pedidos_ExamesForm
 
 
 
-class HomeView(LoginRequiredMixin, ListView):
-    model = CustomUsuario
+class HomeView(LoginRequiredMixin, View):
     template_name = "paciente_pages/home.html"
-    context_object_name = "user"
-    login_url = "/contas/login"
+    login_url = "/contas/login/"
 
-    def get_queryset(self):
-        user = CustomUsuario.objects.get(username=self.request.user)
-        return user
+    def get(self, request, *args, **kwargs):
+        # Obter o usuário atual e as notificações associadas
+        user = request.user
+
+        if user.groups.filter(name="funcionarios").exists():
+            return redirect("menu")
+
+        else:
+
+            notificacoes = Notificacoes.objects.filter(destinatario=user)
+            
+            # Criar o contexto com o usuário e as notificações
+            context = {
+                "user": user,
+                "notificacao": notificacoes
+            }
+            
+            return render(request, self.template_name, context)
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
 
-        model = Notificacoes
-        notificacoes = model.objects.filter(destinatario=self.request.user)
-        context["notificacao"] = notificacoes
-
-
-        return context
-        
 
 class MeusDadosView(LoginRequiredMixin,UpdateView):
     template_name = "paciente_pages/meus_dados.html"  
