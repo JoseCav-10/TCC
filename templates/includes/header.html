@@ -17,62 +17,66 @@
       <div class="dropdown-menu dropdown-list dropdown-menu-right">
         <div class="dropdown-header">Notifications
           <div class="float-right">
-            <a href="#">Mark All As Read</a>
+            <a href="#" id="mark-all-read" onclick="markAllAsRead({{ user.id }})">Mark All As Read</a>
           </div>
+          
+          <!-- CSRF Token (para Django) -->
+          <input type="hidden" id="csrf_token" value="{{ csrf_token }}">
+          
           <div class="my-barra-rol">
 
-            {% for n in notificacao %}
+          {% for n in notificacoes %}
             {% if n.situacao.situacao == "Recusado" %}
-            <a href="#modalrecusado{{ n.id }}" data-toggle="modal" class="a-noti">
-              <div class="notification">
-                <div class="title-horario">
-                  <div class="title-noti">
-                    <img src="{% static 'media/img/exclamacao.png' %}" alt="exclamação">
-                    <h1 class="recusado">Recusado</h1>
-                  </div>
-                  <div class="data-noti">
-                    <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
-                    <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
-                  </div>
-                </div>
-                <div class="recado-noti">
-                  <p>Seu exame de {{ n.pedido.tipo_exame }} foi recusado pelo estabelecimento</p>
-                </div>
-              </div>
-            </a>
-
-            
-            {% elif n.situacao.situacao == "Aprovado"  %}
-
-
-            <a href="#modalaprovado{{ n.id }}" data-toggle="modal" class="a-noti">
-              <div class="notification">
-                <div class="title-horario">
-                  <div class="title-noti">
-                    <img src="{% static 'media/img/confere.png' %}" alt="exclamação">
-                    <h1 class="aprovado">Aprovado</h1>
-                  </div>
-                  <div class="data-noti">
-                    <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
-                    <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
-                  </div>
-                </div>
-                <div class="recado-noti">
-                  <p>Seu exame de {{ n.pedido.tipo_exame }} foi aprovado pelo estabelecimento e já está agendado</p>
-                </div>
-              </div>
-            </a>
-
-
+            <!--marcarVisualizacao({{ n.id }})-->
+                <a href="#modalrecusado{{ n.id }}" data-toggle="modal" class="a-noti" onclick="marcarVisualizacao({{ n.id }})">
+                    <div class="notification">
+                        <div class="title-horario">
+                            <div class="title-noti">
+                                <img src="{% static 'media/img/exclamacao.png' %}" alt="exclamação">
+                                <h1 class="recusado">Recusado</h1>
+                            </div>
+                            <div class="data-noti">
+                                <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
+                                <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
+                            </div>
+                        </div>
+                        <div class="recado-noti">
+                            <p>Seu exame de {{ n.pedido.tipo_exame }} foi recusado pelo estabelecimento</p>
+                        </div>
+                    </div>
+                </a>
+        
+            {% elif n.situacao.situacao == "Aprovado" %}
+                <a href="#modalaprovado{{ n.id }}" data-toggle="modal" class="a-noti" onclick="marcarVisualizacao({{ n.id }})">
+                    <div class="notification">
+                        <div class="title-horario">
+                            <div class="title-noti">
+                                <img src="{% static 'media/img/confere.png' %}" alt="confirmação">
+                                <h1 class="aprovado">Aprovado</h1>
+                            </div>
+                            <div class="data-noti">
+                                <div class="dia-noti">{{ n.criado|date:"d/m/Y" }}</div>
+                                <div class="hora-noti">{{ n.criado|date:"H:i" }}</div>
+                            </div>
+                        </div>
+                        <div class="recado-noti">
+                            <p>Seu exame de {{ n.pedido.tipo_exame }} foi aprovado pelo estabelecimento e já está agendado</p>
+                        </div>
+                    </div>
+                </a>
             {% endif %}
-            {% endfor %}
+          {% endfor %}
 
             
           </div>
         </div>
+        {% if notificacoes %}
+        <div></div>
+        {% else %}
         <div class="dropdown-footer text-center">
-          <a href="#">View All <i class="fas fa-chevron-right"></i></a>
+          <a href="#" aria-disabled="true">Não há notificações <i class="fas fa-chevron-right"></i></a>
         </div>
+        {% endif %}
       </div>
     </li>
 
@@ -126,7 +130,7 @@
 </nav>
 
 
-{% for n in notificacao %}
+{% for n in notificacoes %}
 {% if n.situacao.situacao == "Recusado" %}
 
 <!--Modal-->

@@ -28,6 +28,13 @@
 
 <body>
   <div id="app">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="{{ message.tags }} mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
     <div class="main-wrapper main-wrapper-1">
 
       {% include 'includes/header_func.html' %}

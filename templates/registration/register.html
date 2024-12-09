@@ -29,6 +29,13 @@
     <div class="main-wrapper main-wrapper-1">
 
       <section class="section">
+        {% if messages %}
+          {% for message in messages %}
+            <div class="{{ message.tags }} mt-3" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
         <div class="container my-login-container mt-5">
           <div class="row">
             <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 col-xl-8 offset-xl-2">
@@ -98,7 +105,7 @@
                         
                     <div class="date-sex row mb-3">
                         <div class="my-col1 col">
-                            <label for="dateInput" class="form-label">Data nascimento</label>
+                            <label for="data_nascimento" class="form-label">Data nascimento</label>
                             {{ form.data_nascimento }}
                         </div>
             
@@ -131,7 +138,7 @@
 
     </div>
   </div>
-
+  <script src="{% static 'assets/js/register.js' %}"></script>
   <!-- General JS Scripts -->
   <script src="{% static 'sweetify/sweetify.js' %}"></script>
 

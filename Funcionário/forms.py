@@ -4,7 +4,6 @@ from .models import CustomUsuario, Pedidos_Exames
 
 
 class CustomUsuarioCreateForm(UserCreationForm,forms.ModelForm):
-
     class Meta: 
         model = CustomUsuario
         fields = ("username", "name",'cpf','cartao_sus','data_nascimento','sexo','fone','endereco','cep', 'foto_perfil')

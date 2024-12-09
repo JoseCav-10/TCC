@@ -80,7 +80,7 @@
             <div id="accordion">
 
               {% for p in pedidos %}
-              {% if p.situacao.situacao == "Aprovado" or p.situacao.situacao == "Concluído" %}
+              {% if p.situacao.situacao == "Aprovado" or p.situacao.situacao == "Concluido" %}
               <div class="my-accordion accordion">
                 <div class="my-accordion-h accordion-header" role="button" data-toggle="collapse" data-target="#panel-body-{{ p.id }}" >
                   <h4 class="my-accordion-h4">ID: {{ p.id }} - {{ p.dia_marcado }}</h4>

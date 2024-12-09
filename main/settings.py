@@ -56,6 +56,16 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'alert alert-secondary',
+    messages.INFO: 'alert alert-info',
+    messages.SUCCESS: 'alert alert-success',
+    messages.WARNING: 'alert alert-warning',
+    messages.ERROR: 'alert alert-danger',
+}
+
 
 ROOT_URLCONF = 'main.urls'
 
@@ -92,7 +102,7 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
+'''AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
@@ -105,7 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
-]
+]'''
 
 
 # Internationalization

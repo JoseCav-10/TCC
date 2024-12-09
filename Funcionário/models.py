@@ -52,7 +52,7 @@ class CustomUsuario(AbstractUser):
     cpf = models.CharField("CPF", max_length=14, blank=True, null=True, unique=True)
     name = models.CharField(max_length=255)
     cartao_sus = models.CharField("Cartão do SUS", max_length=100, blank=True, null=True, unique=True)
-    data_nascimento = models.DateField("Data de Nascimento", blank=True, null=True, default=None)
+    data_nascimento = models.DateField("Data de Nascimento", blank=True, null=True)
     sexo = models.CharField("Sexo", choices=SEXO_CHOICES, max_length=20, blank=True, null=True, default=None)
     fone = models.CharField("Telefone", max_length=30, blank=True, null=True, default=None) 
     endereco = models.CharField("Endereço", max_length=255, blank=True, null=True, default=None)
@@ -88,14 +88,9 @@ class Tipo_Exame(Base):
 
 
 class Status_Exame(models.Model):
-    EXAMES_CHOICES = [
-        ("Pendente", "Pendente"),
-        ("Aprovado", "Aprovado"),
-        ("Recusado", "Recusado"),
-        ("Concluído", "Concluído"),
-    ]
     
-    situacao = models.CharField(max_length=20, choices=EXAMES_CHOICES, default="Pendente")
+    
+    situacao = models.CharField(max_length=20, default="Pendente")
 
     def __str__(self):
         return self.situacao

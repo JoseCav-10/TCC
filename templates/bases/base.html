@@ -28,6 +28,13 @@
 
 <body>
   <div id="app">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="{{ message.tags }} mt-3" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
     <div class="main-wrapper main-wrapper-1">
 
       {% include 'includes/header.html' %}
@@ -42,8 +49,11 @@
     </div>
   </div>
 
+
+  <script src="{% static 'assets/js/visualizacao.js' %}"></script>
   <!-- General JS Scripts -->
   <script src="{% static 'sweetify/sweetify.js' %}"></script>
+
 
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

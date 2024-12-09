@@ -7,8 +7,33 @@ from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy,reverse
 from Funcionário.forms import CustomUsuarioChangeForm,Pedidos_ExamesForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
 # Create your views here.
 
+
+@csrf_exempt
+def marcar_visualizacao(request):
+    if request.method == 'POST':
+        try:
+            notificacao_id = request.POST.get('notificacao_id')
+            notificacao = Notificacoes.objects.get(id=notificacao_id)
+            notificacao.visualizacao = True
+            notificacao.save()
+            return JsonResponse({'status': 'success', 'message': 'Notificação marcada como visualizada!'})
+        except Notificacoes.DoesNotExist:
+            return JsonResponse({'status': 'error', 'message': 'Notificação não encontrada!'})
+    return JsonResponse({'status': 'error', 'message': 'Requisição inválida!'})
+
+
+def marcar_todas_como_lidas(request, destinatario_id):
+    if request.method == 'POST':
+
+        # Filtra todas as notificações que pertencem ao destinatário (usuário)
+        Notificacoes.objects.filter(destinatario=request.user, visualizacao=False).update(visualizacao=True)
+        return JsonResponse({'status': 'success', 'message': 'Notificações marcadas como lidas!'})
+    return JsonResponse({'status': 'error', 'message': 'Método não permitido'}, status=405)
 
 
 class HomeView(LoginRequiredMixin, View):
@@ -21,19 +46,17 @@ class HomeView(LoginRequiredMixin, View):
 
         if user.groups.filter(name="funcionarios").exists():
             return redirect("menu")
-
         else:
-
-            notificacoes = Notificacoes.objects.filter(destinatario=user)
+            # Filtrar apenas as notificações que pertencem ao usuário atual
+            notificacoes = Notificacoes.objects.filter(destinatario=user, visualizacao=False)
             
             # Criar o contexto com o usuário e as notificações
             context = {
                 "user": user,
-                "notificacao": notificacoes
+                "notificacoes": notificacoes  # Corrigi o nome para plural
             }
             
-            return render(request, self.template_name, context)
-    
+            return render(request, self.template_name, context)    
 
 
 class MeusDadosView(LoginRequiredMixin,UpdateView):
@@ -69,8 +92,8 @@ class MeusDadosView(LoginRequiredMixin,UpdateView):
         context['pedidos'] = pedidos
 
         model = Notificacoes
-        notificacoes = model.objects.filter(destinatario=self.request.user)
-        context["notificacao"] = notificacoes
+        notificacoes = model.objects.filter(destinatario=self.request.user, visualizacao=False)
+        context["notificacoes"] = notificacoes
 
         return context
 
@@ -89,8 +112,8 @@ class FormAgendamentoView(LoginRequiredMixin,CreateView):
         context["user"] = user
 
         model = Notificacoes
-        notificacoes = model.objects.filter(destinatario=self.request.user)
-        context["notificacao"] = notificacoes
+        notificacoes = model.objects.filter(destinatario=self.request.user, visualizacao=False)
+        context["notificacoes"] = notificacoes
 
         return context
     
@@ -114,6 +137,11 @@ class FormAgendamentoView(LoginRequiredMixin,CreateView):
         Pedidos_Exames.objects.create(requerente=requerente,tipo_exame=tipo_exame,laudo=laudo,urgencia=urgencia,dias_possiveis=dias_possiveis,situacao=situacao)
         print("Pedido feito")
         return redirect(self.get_success_url())
+    
+    def form_invalid(self, form):
+        # Adiciona uma mensagem de erro que será exibida no template
+        messages.error(self.request, "Houve um erro ao processar o formulário. Verifique os campos e tente novamente.")
+        return super().form_invalid(form)
 
 
 class AndamentoView(LoginRequiredMixin, ListView):
@@ -139,8 +167,8 @@ class AndamentoView(LoginRequiredMixin, ListView):
         ]
 
         model = Notificacoes
-        notificacoes = model.objects.filter(destinatario=self.request.user)
-        context["notificacao"] = notificacoes
+        notificacoes = model.objects.filter(destinatario=self.request.user, visualizacao=False)
+        context["notificacoes"] = notificacoes
 
         return context
 
@@ -162,8 +190,8 @@ class DetailsPedidosExamesView(LoginRequiredMixin,DetailView):
         context = super().get_context_data(**kwargs)
 
         model = Notificacoes
-        notificacoes = model.objects.filter(destinatario=self.request.user)
-        context["notificacao"] = notificacoes
+        notificacoes = model.objects.filter(destinatario=self.request.user, visualizacao=False)
+        context["notificacoes"] = notificacoes
 
         return context
 

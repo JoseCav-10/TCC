@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth import login,authenticate
 from .models import CustomUsuario,Pedidos_Exames,Notificacoes,Status_Exame
 from django.contrib.auth.models import Group
+from django.contrib import messages
 # Create your views here.
 
 
@@ -21,6 +22,14 @@ class RegisterUserView(CreateView):
         user = form.save(commit=False)
         user.set_password(form.cleaned_data["password1"])
         user.email = form.cleaned_data["username"]
+        print("##########", form.cleaned_data["data_nascimento"], "##########")
+        print("##########", form.cleaned_data["username"], "##########")
+
+        if 'data_nascimento' in form.cleaned_data:
+            user.data_nascimento = form.cleaned_data['data_nascimento']
+        else:
+            print('Data de nascimento não está no form.cleaned_data')
+
         user.save()
         
 
@@ -43,7 +52,14 @@ class RegisterUserView(CreateView):
            
             return redirect("home")
 
+        messages.success(self.request, "Você foi cadastrado com sucesso!")
+
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        # Adiciona uma mensagem de erro que será exibida no template
+        messages.error(self.request, "Houve um erro ao processar o formulário. Verifique os campos e tente novamente.")
+        return super().form_invalid(form)
 
 
 class ForgotPasswordView(View):
@@ -65,6 +81,7 @@ class ForgotPasswordView(View):
         else:
             # Adicione uma mensagem de erro ou lógica adicional conforme necessário
             print("ERRO")
+            messages.error(self.request, "Houve um erro ao processar o formulário. Verifique os campos e tente novamente.")
             return render(request, self.template_name)
 
 
@@ -78,7 +95,7 @@ class CalendarioView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         urgencia = self.request.GET.get('urgencia')
-        situacao = Status_Exame.objects.get(id=2)
+        situacao = Status_Exame.objects.get(id=6)
         queryset = Pedidos_Exames.objects.filter(situacao=situacao)
 
         if urgencia == '1':
@@ -91,7 +108,7 @@ class CalendarioView(LoginRequiredMixin,ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Aqui você constrói o dicionário de datas como antes.
-        situacao = Status_Exame.objects.get(id=2)
+        situacao = Status_Exame.objects.get(id=6)
         pedidos = Pedidos_Exames.objects.filter(situacao=situacao)
         
         # Resto do seu código para adicionar as datas ao contexto
@@ -133,7 +150,7 @@ class CalendarioView(LoginRequiredMixin,ListView):
         super().get(request, *args, **kwargs)
         
 
-        situacao = Status_Exame.objects.get(id=4)
+        situacao = Status_Exame.objects.get(id=8)
         id = request.POST.get("pk")
         print(id)
         pedido = Pedidos_Exames.objects.get(id=id)
@@ -221,7 +238,7 @@ class PedidoAFuncionarioView(LoginRequiredMixin, ListView):
     
 
     def get_queryset(self):
-        pedidos = Pedidos_Exames.objects.filter(situacao=1)
+        pedidos = Pedidos_Exames.objects.filter(situacao=5)
         print(pedidos)
 
         return pedidos
