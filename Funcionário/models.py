@@ -109,7 +109,7 @@ class Pedidos_Exames(Base):
     
 class Notificacoes(Base):
     destinatario = models.ForeignKey(CustomUsuario, on_delete=models.CASCADE)
-    pedido = models.ForeignKey(Pedidos_Exames,on_delete=models.CASCADE,blank=True,null=True)
+    pedido = models.OneToOneField(Pedidos_Exames,on_delete=models.CASCADE,blank=True,null=True)
     visualizacao = models.BooleanField(default=False)
     situacao = models.ForeignKey(Status_Exame, on_delete=models.CASCADE)
     conteudo = models.TextField(default="Pedido confirmado")

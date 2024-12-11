@@ -239,9 +239,9 @@ class PedidoAFuncionarioView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
 
-        query = self.request.GET.get('q')  # Captura o valor do campo de busca (chave 'q')
+        query = self.request.GET.get('q')  
         if query:
-            pedidos = Pedidos_Exames.objects.filter(requerente__name__icontains=query, situacao=5)  # Filtra pessoas cujo nome contém o valor pesquisado
+            pedidos = Pedidos_Exames.objects.filter(requerente__name__icontains=query, situacao=5)  
         else:
             pedidos = Pedidos_Exames.objects.filter(situacao=5)
         print(pedidos)
