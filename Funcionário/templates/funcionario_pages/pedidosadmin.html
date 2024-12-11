@@ -16,6 +16,14 @@
         <p class="section-lead">
           Veja os pedidos dos pacientes aqui.
         </p>
+
+        <form method="GET" action="{% url 'pedidos' %}" class="mb-4">
+          <div class="input-group">
+              <input type="text" name="q" class="form-control" placeholder="Digite o nome da pessoa" value="{{ request.GET.q }}">
+              <button class="btn btn-primary" type="submit">Buscar</button>
+          </div>
+        </form>
+
         <div class="my-col-func">
           
           {% for p in pedidos %}

@@ -149,7 +149,7 @@ class AndamentoView(LoginRequiredMixin, ListView):
     template_name = "paciente_pages/andamento.html"  # Template a ser utilizado
     context_object_name = 'objetos'  # Nome do contexto para a lista de objetos
     paginate_by = 6
-    ordering = "id"
+    ordering = "-id"
     login_url = "/contas/login"
 
     def get_queryset(self):

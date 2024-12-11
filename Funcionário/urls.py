@@ -9,6 +9,6 @@ urlpatterns = [
     path('pedidos', PedidoAFuncionarioView.as_view(), name='pedidos'),
     path('calendario', CalendarioView.as_view(), name='calendario'),
     path('<int:pk>/form', FormFuncionarioView.as_view(), name='form_func'),
-    path('<int:pk>/detail_pedido', DetailsPedidosExamesFuncView.as_view(), name='detail_func'),
+    #path('<int:pk>/detail_pedido', DetailsPedidosExamesFuncView.as_view(), name='detail_func'),
     #path('teste', "função", name='teste'),
 ]
