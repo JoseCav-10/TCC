@@ -137,7 +137,7 @@
           {% csrf_token %}
           <input type="text"  name="embasamento" id="id_embasamento_aprovar" value="confirmar" style="display: none;">
           <select name="situacao"  id="id_situacao_aprovar" style="display: none;">
-            <option value="6">Aprovado</option>
+            <option value="Aprovado">Aprovado</option>
           </select>
           <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->
           <label for="id_dia_marcado" class="label-control">Dia do exame</label>
@@ -166,7 +166,7 @@
 
           <input type="text" name="embasamento" id="id_embasamento_recusar" value="recusar" style="display: none;">
           <select name="situacao" id="id_situacao_recusar" style="display: none;" >
-            <option value="7">Recusado</option>
+            <option value="Recusado">Recusado</option>
           </select>
           
           <!--Vou ter que trazer o NotificacoesForm para aqui. Terá que ser invisível ou posso fazer pelo def post()-->

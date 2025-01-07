@@ -95,7 +95,7 @@ class CalendarioView(LoginRequiredMixin,ListView):
 
     def get_queryset(self):
         urgencia = self.request.GET.get('urgencia')
-        situacao = Status_Exame.objects.get(id=6)
+        situacao = Status_Exame.objects.get(situacao="Aprovado")
         queryset = Pedidos_Exames.objects.filter(situacao=situacao)
 
         if urgencia == '1':
@@ -108,7 +108,7 @@ class CalendarioView(LoginRequiredMixin,ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         # Aqui você constrói o dicionário de datas como antes.
-        situacao = Status_Exame.objects.get(id=6)
+        situacao = Status_Exame.objects.get(situacao="Aprovado")
         pedidos = Pedidos_Exames.objects.filter(situacao=situacao)
         
         # Resto do seu código para adicionar as datas ao contexto
@@ -150,7 +150,8 @@ class CalendarioView(LoginRequiredMixin,ListView):
         super().get(request, *args, **kwargs)
         
 
-        situacao = Status_Exame.objects.get(id=8)
+        situacao = Status_Exame.objects.get(situacao="Concluido")
+
         id = request.POST.get("pk")
         print(id)
         pedido = Pedidos_Exames.objects.get(id=id)
@@ -196,7 +197,7 @@ class FormFuncionarioView(LoginRequiredMixin, DetailView):
         embasar = request.POST.get("embasamento")
         situ = request.POST.get("situacao")
         
-        situacao = Status_Exame.objects.get(id=situ)
+        situacao = Status_Exame.objects.get(situacao=situ)
         
         
         if embasar == "confirmar":
@@ -241,9 +242,9 @@ class PedidoAFuncionarioView(LoginRequiredMixin, ListView):
 
         query = self.request.GET.get('q')  
         if query:
-            pedidos = Pedidos_Exames.objects.filter(requerente__name__icontains=query, situacao=5)  
+            pedidos = Pedidos_Exames.objects.filter(requerente__name__icontains=query, situacao__situacao="Pendente")  
         else:
-            pedidos = Pedidos_Exames.objects.filter(situacao=5)
+            pedidos = Pedidos_Exames.objects.filter(situacao__situacao="Pendente")
         print(pedidos)
 
         return pedidos
